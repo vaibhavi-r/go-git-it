@@ -1,3 +1,4 @@
+console.log("Welcome to SECTIONS.JS");
 
 /**
  * scrollVis - encapsulates
@@ -93,6 +94,9 @@ var scrollVis = function () {
   // through the section with the current
   // progress through the section.
   var updateFunctions = [];
+
+
+
 
   /**
    * chart
@@ -280,6 +284,15 @@ var scrollVis = function () {
     //   })
     //   .attr('opacity', 0);
 
+
+    //Insert Images for Github
+    g.append("image")
+      .attr("class", "picture")
+      .attr("x", 1800)
+      .attr("y", 0)
+      .attr('opacity', 0);
+
+
     //Insert workspace rect
     g.append("rect")
         .attr("class","workspace")
@@ -348,9 +361,13 @@ var scrollVis = function () {
     activateFunctions[3] = showLocalRep;
     activateFunctions[4] = showUpstream;
     activateFunctions[5] = showStash;
-    activateFunctions[6] = showHistAll;
-    activateFunctions[7] = showCough;
-    activateFunctions[8] = showHistAll;
+    activateFunctions[6] = showStash;
+    activateFunctions[7] = showStash;
+    activateFunctions[8] = showStash;
+    activateFunctions[9] = showStash;
+    activateFunctions[10] = showStash;
+    activateFunctions[11] = showStash;
+    activateFunctions[12] = showStash;
 
     // updateFunctions are called while
     // in a particular section to update
@@ -358,7 +375,7 @@ var scrollVis = function () {
     // Most sections do not need to be updated
     // for all scrolling and so are set to
     // no-op functions.
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0; i < activateFunctions.length; i++) {
       updateFunctions[i] = function () {};
     }
     updateFunctions[7] = updateCough;
@@ -412,6 +429,25 @@ var scrollVis = function () {
    * shows: filler count title
    *
    */
+
+  function hideElement(domTag){
+      g.selectAll(domTag)
+      .transition()
+      .duration(0)
+      .attr('opacity', 0);
+  }
+
+  function showElement(domTag, x, y){
+    g.selectAll(domTag)
+      .transition()
+      .duration(600)
+      .attr("x",x)
+      .attr("y",y)
+      .attr('opacity', 1);
+  }
+
+
+
   function showWorkspace() {
     g.selectAll('.openvis-title')
       .transition()
@@ -438,8 +474,6 @@ var scrollVis = function () {
         .transition()
         .duration(600)
         .attr('opacity', 0);
-
-   
   }
 
   function showIndex() {
