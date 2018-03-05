@@ -142,12 +142,15 @@ var scrollVis = function(){
               .attr('opacity',op);
         }
 
+
+        var w = width/10;
+        var h = height*4.5/10; 
         //Create Rectangles for Different Locations for Content Model
-        createRect("workspace", 0, 0, 100, 300, "red", 0);
-        createRect("indexspace", 0, 0, 100, 300, "red", 0);
-        createRect("local-rep", 0, 0, 100, 300, "red", 0);
-        createRect("remote-rep", 0, 0, 100, 300, "red", 0);
-        createRect("stash", 0, 0, 100, 300, "red", 0);
+        createRect("stash", 0, 65, w, h,"#e7fef1", 0);
+        createRect("workspace",0, 65, w, h, "#e7fef1", 0);
+        createRect("indexspace",0, 65, w, h, "#e7fef1", 0);
+        createRect("local-rep", 0, 65, w, h, "#e7fef1", 0);
+        createRect("remote-rep",100, 65, w, h, "#f1e7fe", 0); //Different color and start position for remote repo
 
         console.log("....END Setup Vis")
     };
@@ -216,16 +219,23 @@ var scrollVis = function(){
    function hideElement(domTag){
           g.selectAll(domTag)
           .transition()
-          .duration(0)
+          .duration(100)
           .attr('opacity', 0);
     }
 
-    function showElement(domTag, x, y){
+    function showElement(domTag){
         g.selectAll(domTag)
           .transition()
           .duration(600)
-          .attr("x",x)
-          .attr("y",y)
+          .attr('opacity', 1);
+    }
+
+    function showRectangle(domTag, x, y){
+        g.selectAll(domTag)
+          .transition()
+          .duration(600)
+          .attr("x",xScale(x))
+          .attr("y",yScale(y))
           .attr('opacity', 1);
     }
 
@@ -280,6 +290,7 @@ var scrollVis = function(){
      */
      function showLocationModel(){
 
+
           hideElement('.workspace');
 
      }
@@ -293,14 +304,7 @@ var scrollVis = function(){
      * hides: index rect
      */
     function showWorkspace() {
-
-        g.selectAll(".workspace")
-          .transition()
-          .duration(600)
-          .attr("x",150)
-          .attr("y",0)
-          .attr('opacity', 1);
-
+        showRectangle('.workspace',25,65);
         hideElement('.indexspace');
     }
 
@@ -313,14 +317,7 @@ var scrollVis = function(){
      * hides: local rep rect
      */
     function showIndex() {
-
-       g.selectAll(".indexspace")
-            .transition()
-            .duration(600)
-            .attr("x",300)
-            .attr("y",0)
-            .attr('opacity', 1);
-
+        showRectangle('.indexspace',45,65);
         hideElement('.local-rep');
     }
 
@@ -334,13 +331,7 @@ var scrollVis = function(){
      */
     function showLocalRep() {
 
-        g.selectAll(".local-rep")
-            .transition()
-            .duration(600)
-            .attr("x",450)
-            .attr("y",0)
-            .attr('opacity', 1);
-
+        showRectangle('.local-rep',65,65);
         hideElement('.remote-rep');
 
     }
@@ -354,13 +345,7 @@ var scrollVis = function(){
      * hides: stash rect
      */
     function showRemoteRep() {
-       g.selectAll(".remote-rep")
-            .transition()
-            .duration(600)
-            .attr("x",600)
-            .attr("y",0)
-            .attr('opacity', 1);
-
+        showRectangle('.remote-rep',85,65);
         hideElement('.stash');
     }
 
@@ -374,12 +359,7 @@ var scrollVis = function(){
      */
 
     function showStash() {
-       g.selectAll(".stash")
-            .transition()
-            .duration(600)
-            .attr("x",0)
-            .attr("y",0)
-            .attr('opacity', 1);
+        showRectangle('.stash',5,65);
     }
 
 
