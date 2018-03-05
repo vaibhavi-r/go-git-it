@@ -6,8 +6,8 @@ console.log("Welcome to SECTIONS.JS");
  * using reusable charts pattern:
  * http://bost.ocks.org/mike/chart/
  */
-var scrollVis = function(){
 
+var scrollVis = function(){
     console.log("..Scroll Vis function");
     // constants to define the size
     // and margins of the vis area.
@@ -33,18 +33,18 @@ var scrollVis = function(){
 
     // Scales converting 0-100 to the Chart's width and height
     // Useful to specify relative x,y position, independent of custom pixel area
-    var xScale = d3.scaleLinear()
+    xScale = d3.scaleLinear()
       .domain([0,100])
       .range([0, width]);
 
-    var yScale = d3.scaleLinear()
+    yScale = d3.scaleLinear()
       .domain([0,100])
       .range([height, 0]);
 
-    var xAxis = d3.axisBottom()
+    xAxis = d3.axisBottom()
        .scale(xScale);
 
-    var yAxis = d3.axisLeft()
+    yAxis = d3.axisLeft()
        .scale(yScale);
 
 
@@ -153,8 +153,9 @@ var scrollVis = function(){
               .attr('opacity',op);
         }
 
-        var w = width/10;
-        var h = height*4.5/10; 
+        //@global
+        w = width/10;
+        h = height*4.5/10; 
         //Create Rectangles for Different Locations for Content Model
         createRect("stash", -100, 65, w, h,"#80e5c4", 0);
         createRect("workspace",-100, 65, w, h, "#80e5c4", 0);
@@ -163,21 +164,30 @@ var scrollVis = function(){
         createRect("remote-rep",200, 65, w, h, "#6e9cd0", 0); //Different color and start position for remote repo
 
         //Function to create image with given link, alt, dimensions and opacity
-        var createImage = function(img, alt, x, y, w, h, op ){
+        var createImage = function(img, className, id, alt, x, y, w, h, op ){
             g.append("image")
-              .attr("class", "picture")
+              .attr("class", className)
+              .attr("id", id)
               .attr("xlink:href", img)
               .attr("alt", "alt")
               .attr("x", xScale(x))
               .attr("y", yScale(y))
-              .attr("width", 50)
-              .attr("height", 50)
+              .attr("width", w)
+              .attr("height", h)
               .attr("opacity", op);
         }
 
         //Create Images for each picture that might be on the screen 
-        //(If 3 files at once, 3 images to be added here)
-        createImage("/src/images/git_icon.svg", "file", 50, 65, 100, 100, 0);
+             
+        createImage("/src/images/git_icon.svg",    "icon", "git-icon", "git icon", 50, 65, 100, 100, 0);
+
+        //@global
+        w_file = width/10;
+        h_file = w_file;   
+        createImage("/src/images/file-green.svg",  "icon file-icon", "file-green", "git icon", 20, 0, w_file, h_file, 0);
+        createImage("/src/images/file-black.svg",  "icon file-icon", "file-black", "git icon", 20, 0, w_file, h_file, 0);
+        createImage("/src/images/file-red.svg",    "icon file-icon", "file-red", "git icon", 20, 0, w_file, h_file, 0);
+        createImage("/src/images/file-yellow.svg", "icon file-icon", "file-yellow", "git icon", 20, 0, w_file, h_file, 0);
 
 
         /*
@@ -286,6 +296,7 @@ var scrollVis = function(){
           .attr('opacity', 1);
     }
 
+    // @Global
     showRectangle = function(domTag, x, y){
         g.selectAll(domTag)
           .transition()
@@ -579,13 +590,23 @@ function display() {
     console.log(".END display function")
 }
 
+/*  
+    GLOBAL VARIABLES
+    Functions and variables needed for user-driven events and maintaining state
+*/
 
+var showRectangle;
+var xScale;
+var yScale;
+var xAxis;
+var yAxis;
 
+var w, h; //rectangle dims
+var w_file, h_file; //file icon dims
 
 /*  UI Event Logic Implementation
     Functions to execute event logic when fired by event handler
 */
-var showRectangle;
 var showAllRects = function (){
     console.log("Showing All Rects!");
     showRectangle('.workspace',25,65);
@@ -595,15 +616,29 @@ var showAllRects = function (){
     showRectangle('.stash',5,65);
 }
 
+var createNewFileAnimation = function()
+{
+    var newFile = d3.select('#file-green');
+    newFile.transition()
+            .duration(500)
+            .attr("x", xScale(30))
+            .attr("y", yScale(50))
+            .attr("opacity",1);
+};
+
+var gitAdd = function(){};
+var gitCommit = function(){};
+var gitPush = function(){};
 
 /*  UI Event Handlers
-
     Attaching Event Handlers and Listeners to user-driven elements in the story
 */
 
-$('#loc-model-rect-link').click(function(){ console.log('Link clicked!');
-                                            showAllRects(); return false; }
-                                );
+$('#loc-model-rect-link').click(function(){ showAllRects(); return false; });
+$('#upstream-create-link').click(function(){ createNewFileAnimation(); return false; });
+$('#upstream-add-link').click(function(){ gitAdd(); return false; });
+$('#upstream-commit-link').click(function(){ gitCommit(); return false; });
+$('#upstream-push-link').click(function(){ gitPush(); return false; });
 
 
 
