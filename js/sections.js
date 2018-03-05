@@ -146,28 +146,29 @@ var scrollVis = function(){
         var w = width/10;
         var h = height*4.5/10; 
         //Create Rectangles for Different Locations for Content Model
-        createRect("stash", 0, 65, w, h,"#e7fef1", 0);
-        createRect("workspace",0, 65, w, h, "#e7fef1", 0);
-        createRect("indexspace",0, 65, w, h, "#e7fef1", 0);
-        createRect("local-rep", 0, 65, w, h, "#e7fef1", 0);
-        createRect("remote-rep",100, 65, w, h, "#f1e7fe", 0); //Different color and start position for remote repo
+        createRect("stash", -100, 65, w, h,"#80e5c4", 0);
+        createRect("workspace",-100, 65, w, h, "#80e5c4", 0);
+        createRect("indexspace",-100, 65, w, h, "#80e5c4", 0);
+        createRect("local-rep", -100, 65, w, h, "#80e5c4", 0);
+        createRect("remote-rep",200, 65, w, h, "#6e9cd0", 0); //Different color and start position for remote repo
 
-
-        var createImage = function(){
+        //Function to create image with given link, alt, dimensions and opacity
+        var createImage = function(img, alt, x, y, w, h, op ){
             g.append("image")
               .attr("class", "picture")
-              .attr("x", xScale(50))
-              .attr("xlink:href","/src/images/file-black.svg" )
-              .attr("alt", "sample image")
-              .attr("y", yScale(65))
+              .attr("xlink:href", img)
+              .attr("alt", "alt")
+              .attr("x", xScale(x))
+              .attr("y", yScale(y))
               .attr("width", 50)
-              .attr("height", 50);
+              .attr("height", 50)
+              .attr("opacity", op);
         }
 
-        createImage();
-
-
-
+        //Create Images for each picture that might be on the screen 
+        //(If 3 files at once, 3 images to be added here)
+        createImage("/src/images/git_icon.svg", "file", 50, 65, 100, 100, 0);
+        
         console.log("....END Setup Vis")
     };
 
@@ -212,8 +213,6 @@ var scrollVis = function(){
         
          console.log("....END Setup Sections")
     };
-
-
 
 
     /**
@@ -270,7 +269,7 @@ var scrollVis = function(){
           .duration(600)
           .attr('opacity', 1.0);
 
-        hideElement('.workspace');
+        hideElement('.picture');
     }
 
 
@@ -287,12 +286,13 @@ var scrollVis = function(){
         hideElement('.vis-title');
 
         g.select(".picture")
-          .attr("x", xScale(50))
-          .attr("xlink:href","/src/images/file-black.svg" )
-          .attr("alt", "sample image")
-          .attr("y", yScale(65))
-          .attr("width", 50)
-          .attr("height", 50);
+          .transition()
+          .duration(500)
+          .attr("x", 100)
+          .attr("y",0)
+          .attr("width", 150)
+          .attr("height", 150)
+          .attr("opacity", 1);
      }
 
 
@@ -305,6 +305,7 @@ var scrollVis = function(){
      */
      function showLocationModel(){
 
+          hideElement('.picture');
 
           hideElement('.workspace');
 
