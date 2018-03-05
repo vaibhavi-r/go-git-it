@@ -168,6 +168,39 @@ var scrollVis = function(){
         //Create Images for each picture that might be on the screen 
         //(If 3 files at once, 3 images to be added here)
         createImage("/src/images/git_icon.svg", "file", 50, 65, 100, 100, 0);
+
+
+        /*
+          Add dynamic path for tweening image
+          Inspiration: https://bl.ocks.org/mbostock/1705868
+          http://bl.ocks.org/KoGor/8162640
+          https://bl.ocks.org/mbostock/5649592
+          http://www.thesoftwaresimpleton.com/blog/2016/06/12/animate-path-arc/
+          http://bl.ocks.org/dbuezas/9306799
+          https://stackoverflow.com/questions/41865014/how-to-change-easing-in-d3-pathtween-function
+          https://bl.ocks.org/d3noob/ced1b9b18bd8192d2c898884033b5529
+        */
+        //Function to create Path data
+        var getPoints = function(){
+          return [
+                    [480, 200],
+                    [580, 400],
+                    [680, 100],
+                    [780, 300],
+                    [180, 300],
+                    [280, 100],
+                    [380, 400]
+                  ];
+        }
+
+        var points = getPoints();
+
+
+        var path = svg.append("path")
+            .data([points])
+            .attr("d", d3.line().curve(d3.curveCatmullRomOpen));
+            // .interpolate("cardinal-closed"));
+
         
         console.log("....END Setup Vis")
     };
@@ -305,7 +338,26 @@ var scrollVis = function(){
      */
      function showLocationModel(){
 
-          hideElement('.picture');
+          //hideElement('.picture');
+
+          function transition() {
+            d3.select('.picture').transition()
+                .duration(10000)
+                .attrTween("transform", translateAlong(path.node()))
+                .each("end", transition);
+          }
+
+          // Returns an attrTween for translating along the specified path element.
+          function translateAlong(path) {
+            var l = path.getTotalLength();
+            return function(d, i, a) {
+              return function(t) {
+                var p = path.getPointAtLength(t * l);
+                return "translate(" + p.x + "," + p.y + ")";
+              };
+            };
+
+          }
 
           hideElement('.workspace');
 
