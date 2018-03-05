@@ -11,9 +11,10 @@ var scrollVis = function(){
     console.log("..Scroll Vis function");
     // constants to define the size
     // and margins of the vis area.
-    var width = 1000;
+    var width = 800;
     var height = 520;
-    var margin = { top: 0, left: 20, bottom: 40, right: 10 };
+    var margin = { top: 20, left: 20, bottom: 20, right: 20 };
+
 
     // Keep track of which visualization
     // we are on and which was the last
@@ -30,24 +31,22 @@ var scrollVis = function(){
     // for displaying visualizations
     var g = null;  
 
-    // We will set the domain when the
-    // data is processed.
+    // Scales converting 0-100 to the Chart's width and height
+    // Useful to specify relative x,y position, independent of custom pixel area
     var xScale = d3.scaleLinear()
       .domain([0,100])
       .range([0, width]);
 
-    // The bar chart display is horizontal
-    // so we can use an ordinal scale
-    // to get width and y locations.
     var yScale = d3.scaleLinear()
-      .domain([0, 1, 2])
-      .range([0, height - 50], 0.1, 0.1);
-
-
-    //var locationScale
+      .domain([0,100])
+      .range([height, 0]);
 
     var xAxis = d3.axisBottom()
        .scale(xScale);
+
+    var yAxis = d3.axisLeft()
+       .scale(yScale);
+
 
     // When scrolling to a new section
     // the activation function for that
@@ -61,7 +60,6 @@ var scrollVis = function(){
     var updateFunctions = [];
 
 
-
     /**
      * chart
      *
@@ -71,21 +69,19 @@ var scrollVis = function(){
      */
 
     var chart = function (selection) {
-      console.log("Selection - ", selection);
+      // console.log("Selection - ", selection); //#vis div
 
       selection.each(function () {
           // create svg and give it a width and height
           svg = d3.select(this).append('svg');
-
-          console.log('SVG = ', svg);
+          // console.log('SVG = ', svg);
 
           svg.attr('width', width + margin.left + margin.right);
           svg.attr('height', height + margin.top + margin.bottom);
 
           svg.append('g');
 
-          // this group element will be used to contain all
-          // other elements.
+          // this group element will be used to contain all other elements.
           g = svg.select('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
@@ -106,48 +102,47 @@ var scrollVis = function(){
         g.append('g')
           .attr('class', 'x axis')
           .attr('transform', 'translate(0,' + height + ')')
-          // .call(xAxisBar);
-        g.select('.x.axis').style('opacity', 0);
+          .call(xAxis);
+        g.select('.x.axis').style('opacity', 1);
 
-        //  openvis title
+        // axis
+        g.append('g')
+          .attr('class', 'y axis')
+          .attr('transform', 'translate(0,0)')
+          .call(yAxis);
+        g.select('.y.axis').style('opacity', 1);
+
+
+        // vis title
         g.append('text')
-          .attr('class', 'title openvis-title')
+          .attr('class', 'title vis-title')
           .attr('x', width / 2)
           .attr('y', height / 3)
           .text('Go Git It');
 
         g.append('text')
-          .attr('class', 'sub-title openvis-title')
+          .attr('class', 'sub-title vis-title')
           .attr('x', width / 2)
           .attr('y', (height / 3) + (height / 5))
           .text('An Explorable Explanation');
 
-        g.selectAll('.openvis-title')
+        g.selectAll('.vis-title')
           .attr('opacity', 0);
 
-        // count filler word count title
-        g.append('text')
-          .attr('class', 'title count-title highlight')
-          .attr('x', width / 2)
-          .attr('y', height / 3)
-          .text('180');
+        // // count filler word count title
+        // g.append('text')
+        //   .attr('class', 'title count-title highlight')
+        //   .attr('x', width / 2)
+        //   .attr('y', height / 3)
+        //   .text('180')
+        //   .attr('opacity', 0);
 
-        g.append('text')
-          .attr('class', 'sub-title count-title')
-          .attr('x', width / 2)
-          .attr('y', (height / 3) + (height / 5))
-          .text('Filler Words');
-
-        g.selectAll('.count-title')
-          .attr('opacity', 0);
-
-
-        //Insert Images for Github
-        g.append("image")
-          .attr("class", "picture")
-          .attr("x", 1800)
-          .attr("y", 0)
-          .attr('opacity', 0);
+        // g.append('text')
+        //   .attr('class', 'sub-title count-title')
+        //   .attr('x', width / 2)
+        //   .attr('y', (height / 3) + (height / 5))
+        //   .text('Filler Words')
+        //   .attr('opacity', 0);
 
 
         //Insert workspace rect
@@ -180,9 +175,9 @@ var scrollVis = function(){
             .style("fill","#e5f5f9")
             .attr('opacity', 0);
 
-        //Insert upstream rect
+        //Insert remote repository rect
         g.append("rect")
-            .attr("class","upstream")
+            .attr("class","remote-rep")
             .attr("x",1800)
             .attr("y",0)
             .attr("width",100)
@@ -199,6 +194,14 @@ var scrollVis = function(){
             .attr("height",300)
             .style("fill","#e5f5f9")
             .attr('opacity', 0);
+
+        //Insert Images for Github
+        g.append("image")
+          .attr("class", "picture")
+          .attr("x", 1800)
+          .attr("y", 0)
+          .attr('opacity', 0);
+
 
         console.log("....END Setup Vis")
     };
@@ -220,10 +223,10 @@ var scrollVis = function(){
         // time the active section changes
         activateFunctions[0] = showTitle;
         activateFunctions[1] = showWorkspace;
-        activateFunctions[2] = showIndex;
-        activateFunctions[3] = showLocalRep;
-        activateFunctions[4] = showUpstream;
-        activateFunctions[5] = showStash;
+        activateFunctions[2] = showWorkspace;
+        activateFunctions[3] = showIndex;
+        activateFunctions[4] = showLocalRep;
+        activateFunctions[5] = showRemoteRep;
         activateFunctions[6] = showStash;
         activateFunctions[7] = showStash;
         activateFunctions[8] = showStash;
@@ -231,6 +234,9 @@ var scrollVis = function(){
         activateFunctions[10] = showStash;
         activateFunctions[11] = showStash;
         activateFunctions[12] = showStash;
+        activateFunctions[13] = showStash;
+        activateFunctions[14] = showStash;
+        activateFunctions[15] = showStash;
 
         // updateFunctions are called while
         // in a particular section to update
@@ -265,43 +271,7 @@ var scrollVis = function(){
      *
      */
 
-    /**
-     * showTitle - initial title
-     *
-     * hides: count title
-     * (no previous step to hide)
-     * shows: intro title
-     *
-     */
-    function showTitle() {
-      // g.selectAll('.count-title')
-      //   .transition()
-      //   .duration(0)
-      //   .attr('opacity', 0);
-
-        g.selectAll('.openvis-title')
-          .transition()
-          .duration(600)
-          .attr('opacity', 1.0);
-
-        g.selectAll(".workspace")
-          .transition()
-          .duration(0)
-          .attr('opacity', 0);
-    }
-
-
-
-    /**
-     * showFillerTitle - filler counts
-     *
-     * hides: intro title
-     * hides: square grid
-     * shows: filler count title
-     *
-     */
-
-    function hideElement(domTag){
+   function hideElement(domTag){
           g.selectAll(domTag)
           .transition()
           .duration(0)
@@ -319,21 +289,35 @@ var scrollVis = function(){
 
 
 
+    /**
+     * showTitle - initial title
+     *
+     * hides: count title
+     * shows: intro title
+     *
+     */
+    function showTitle() {
+
+        g.selectAll('.vis-title')
+          .transition()
+          .duration(600)
+          .attr('opacity', 1.0);
+
+        hideElement('.workspace');
+    }
+
+
+    /**
+     * showFillerTitle - filler counts
+     *
+     * hides: intro title
+     * hides: square grid
+     * shows: filler count title
+     *
+     */
     function showWorkspace() {
-        g.selectAll('.openvis-title')
-          .transition()
-          .duration(0)
-          .attr('opacity', 0);
+        hideElement('.vis-title');
 
-        g.selectAll('.square')
-          .transition()
-          .duration(0)
-          .attr('opacity', 0);
-
-        // g.selectAll('.count-title')
-        //   .transition()
-        //   .duration(600)
-        //   .attr('opacity', 1.0);
         g.selectAll(".workspace")
           .transition()
           .duration(600)
@@ -341,12 +325,8 @@ var scrollVis = function(){
           .attr("y",0)
           .attr('opacity', 1);
 
-       g.selectAll(".indexspace")
-            .transition()
-            .duration(600)
-            .attr('opacity', 0);
+        hideElement('.indexspace');
     }
-
 
 
     function showIndex() {
@@ -358,10 +338,7 @@ var scrollVis = function(){
             .attr("y",0)
             .attr('opacity', 1);
 
-       g.selectAll(".local-rep")
-            .transition()
-            .duration(600)
-            .attr('opacity', 0);
+      hideElement('.local-rep');
     }
 
     function showLocalRep() {
@@ -372,15 +349,13 @@ var scrollVis = function(){
             .attr("y",0)
             .attr('opacity', 1);
 
-       g.selectAll(".upstream")
-            .transition()
-            .duration(600)
-            .attr('opacity', 0);
+      hideElement('.remote-rep');
+
     }
 
-    function showUpstream() {
+    function showRemoteRep() {
 
-       g.selectAll(".upstream")
+       g.selectAll(".remote-rep")
             .transition()
             .duration(600)
             .attr("x",600)
@@ -438,7 +413,7 @@ var scrollVis = function(){
      *  (xAxisHist or xAxisBar)
      */
     function showAxis(axis) {
-        g.select('.x.axis')
+        g.select('.axis')
           .call(axis)
           .transition().duration(500)
           .style('opacity', 1);
@@ -450,7 +425,7 @@ var scrollVis = function(){
      *
      */
     function hideAxis() {
-        g.select('.x.axis')
+        g.select('.axis')
           .transition().duration(500)
           .style('opacity', 0);
     }
@@ -489,8 +464,6 @@ var scrollVis = function(){
     }
 
 
-
-
    /**
      * activate -
      *
@@ -507,7 +480,6 @@ var scrollVis = function(){
     }; //END chart activate
 
  
-
     /**
      * update
      *
@@ -540,7 +512,6 @@ function display() {
     // display it
     var plot = scrollVis();
     d3.select('#vis')
-      // .datum(data)
       .call(plot);
 
     // setup scroll functionality
