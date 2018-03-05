@@ -152,6 +152,22 @@ var scrollVis = function(){
         createRect("local-rep", 0, 65, w, h, "#e7fef1", 0);
         createRect("remote-rep",100, 65, w, h, "#f1e7fe", 0); //Different color and start position for remote repo
 
+
+        var createImage = function(){
+            g.append("image")
+              .attr("class", "picture")
+              .attr("x", xScale(50))
+              .attr("xlink:href","/src/images/file-black.svg" )
+              .attr("alt", "sample image")
+              .attr("y", yScale(65))
+              .attr("width", 50)
+              .attr("height", 50);
+        }
+
+        createImage();
+
+
+
         console.log("....END Setup Vis")
     };
 
@@ -240,8 +256,6 @@ var scrollVis = function(){
     }
 
 
-
-
     /**
      * showTitle - initial title
      *
@@ -272,12 +286,13 @@ var scrollVis = function(){
         //Insert Images for Github
         hideElement('.vis-title');
 
-        g.append("image")
-          .attr("class", "picture")
-          .attr("x", 1800)
-          .attr("y", 0)
-          .attr('opacity', 0);
-
+        g.select(".picture")
+          .attr("x", xScale(50))
+          .attr("xlink:href","/src/images/file-black.svg" )
+          .attr("alt", "sample image")
+          .attr("y", yScale(65))
+          .attr("width", 50)
+          .attr("height", 50);
      }
 
 

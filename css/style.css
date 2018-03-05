@@ -50,6 +50,12 @@
   /* background-color: #ddd; */
 }
 
+
+.picture{
+  z-index: 10;
+}
+
+
 #vis .title {
   font-size:80px;
   text-anchor: middle;
@@ -68,11 +74,12 @@
 }
 
 .highlight {
-  fill: #008080;
+/*  fill: #008080; */
+  fill: #B266B2;
   font-weight: bold;
 }
 
-.cough-arrow {
+.arrow {
   stroke: #000;
   stroke-width: 4px;
 
