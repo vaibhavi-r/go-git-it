@@ -1,3 +1,5 @@
+console.log("Welcome to SCROLLER.JS");
+
 /**
 Snippet: Force page scroll position to top on page refresh
 **/
@@ -139,3 +141,6 @@ function scroller() {
 
   return scroll;
 }
+
+
+console.log("End of SCROLLER.JS");

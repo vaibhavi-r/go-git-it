@@ -98,14 +98,14 @@ var scrollVis = function(){
     var setupVis = function () {
 
         console.log("....Setup Vis")
-        // axis
+        // x-axis
         g.append('g')
           .attr('class', 'x axis')
           .attr('transform', 'translate(0,' + height + ')')
           .call(xAxis);
         g.select('.x.axis').style('opacity', 1);
 
-        // axis
+        // y-axis
         g.append('g')
           .attr('class', 'y axis')
           .attr('transform', 'translate(0,0)')
@@ -115,7 +115,7 @@ var scrollVis = function(){
 
         // vis title
         g.append('text')
-          .attr('class', 'title vis-title')
+          .attr('class', 'title vis-title highlight')
           .attr('x', width / 2)
           .attr('y', height / 3)
           .text('Go Git It');
@@ -129,83 +129,28 @@ var scrollVis = function(){
         g.selectAll('.vis-title')
           .attr('opacity', 0);
 
-        // // count filler word count title
-        // g.append('text')
-        //   .attr('class', 'title count-title highlight')
-        //   .attr('x', width / 2)
-        //   .attr('y', height / 3)
-        //   .text('180')
-        //   .attr('opacity', 0);
+        //Function to create rectangle with given dimensions, fill and opacity
+        var createRect = function(className, x, y, w, h, color, op)
+        {
+            g.append("rect")
+              .attr("class", className + " rectangle")
+              .attr("x", xScale(x))
+              .attr("y", yScale(y))
+              .attr("width", w)
+              .attr("height", h)
+              .style("fill", color)
+              .attr('opacity',op);
+        }
 
-        // g.append('text')
-        //   .attr('class', 'sub-title count-title')
-        //   .attr('x', width / 2)
-        //   .attr('y', (height / 3) + (height / 5))
-        //   .text('Filler Words')
-        //   .attr('opacity', 0);
-
-
-        //Insert workspace rect
-        g.append("rect")
-            .attr("class","workspace")
-            .attr("x",1800)
-            .attr("y",0)
-            .attr("width",100)
-            .attr("height",300)
-            .style("fill","#e5f5f9")
-            .attr('opacity', 0);
-
-        //Insert index rect
-        g.append("rect")
-            .attr("class","indexspace")
-            .attr("x",1800)
-            .attr("y",0)
-            .attr("width",100)
-            .attr("height",300)
-            .style("fill","#e5f5f9")
-            .attr('opacity', 0);
-
-        //Insert local repository rect
-        g.append("rect")
-            .attr("class","local-rep")
-            .attr("x",1800)
-            .attr("y",0)
-            .attr("width",100)
-            .attr("height",300)
-            .style("fill","#e5f5f9")
-            .attr('opacity', 0);
-
-        //Insert remote repository rect
-        g.append("rect")
-            .attr("class","remote-rep")
-            .attr("x",1800)
-            .attr("y",0)
-            .attr("width",100)
-            .attr("height",300)
-            .style("fill","#e5f5f9")
-            .attr('opacity', 0);
-
-        //Insert upstream rect
-        g.append("rect")
-            .attr("class","stash")
-            .attr("x",1800)
-            .attr("y",0)
-            .attr("width",100)
-            .attr("height",300)
-            .style("fill","#e5f5f9")
-            .attr('opacity', 0);
-
-        //Insert Images for Github
-        g.append("image")
-          .attr("class", "picture")
-          .attr("x", 1800)
-          .attr("y", 0)
-          .attr('opacity', 0);
-
+        //Create Rectangles for Different Locations for Content Model
+        createRect("workspace", 0, 0, 100, 300, "red", 0);
+        createRect("indexspace", 0, 0, 100, 300, "red", 0);
+        createRect("local-rep", 0, 0, 100, 300, "red", 0);
+        createRect("remote-rep", 0, 0, 100, 300, "red", 0);
+        createRect("stash", 0, 0, 100, 300, "red", 0);
 
         console.log("....END Setup Vis")
     };
-
 
 
     /**
@@ -222,21 +167,18 @@ var scrollVis = function(){
         // activateFunctions are called each
         // time the active section changes
         activateFunctions[0] = showTitle;
-        activateFunctions[1] = showWorkspace;
-        activateFunctions[2] = showWorkspace;
-        activateFunctions[3] = showIndex;
-        activateFunctions[4] = showLocalRep;
-        activateFunctions[5] = showRemoteRep;
-        activateFunctions[6] = showStash;
+        activateFunctions[1] = showGitIntro;
+        activateFunctions[2] = showLocationModel;
+        activateFunctions[3] = showWorkspace;
+        activateFunctions[4] = showIndex;
+        activateFunctions[5] = showLocalRep;
+        activateFunctions[6] = showRemoteRep;
         activateFunctions[7] = showStash;
-        activateFunctions[8] = showStash;
-        activateFunctions[9] = showStash;
-        activateFunctions[10] = showStash;
-        activateFunctions[11] = showStash;
-        activateFunctions[12] = showStash;
-        activateFunctions[13] = showStash;
-        activateFunctions[14] = showStash;
-        activateFunctions[15] = showStash;
+        activateFunctions[8] = showCommandsIntro;
+        activateFunctions[9] = showUpstreamCommands;
+        activateFunctions[10] = showDownstreamCommands;
+        activateFunctions[11] = showStashCommands;
+        activateFunctions[12] = showExplore;
 
         // updateFunctions are called while
         // in a particular section to update
@@ -249,10 +191,9 @@ var scrollVis = function(){
           updateFunctions[i] = function () {};
         }
         
-          updateFunctions[7] = updateCough;
-
          console.log("....END Setup Sections")
     };
+
 
 
 
@@ -270,6 +211,7 @@ var scrollVis = function(){
      * user may be scrolling up or down).
      *
      */
+
 
    function hideElement(domTag){
           g.selectAll(domTag)
@@ -289,12 +231,13 @@ var scrollVis = function(){
 
 
 
+
     /**
      * showTitle - initial title
      *
-     * hides: count title
-     * shows: intro title
-     *
+     * hides: none
+     * shows: landing title
+     * hides: 
      */
     function showTitle() {
 
@@ -308,15 +251,48 @@ var scrollVis = function(){
 
 
     /**
-     * showFillerTitle - filler counts
+     * showGitIntro - what is git and why use it
      *
-     * hides: intro title
-     * hides: square grid
-     * shows: filler count title
+     * hides: landing title
+     * shows: git intro images
+     * hides: location model
+     */
+
+     function showGitIntro(){
+        //Insert Images for Github
+        hideElement('.vis-title');
+
+        g.append("image")
+          .attr("class", "picture")
+          .attr("x", 1800)
+          .attr("y", 0)
+          .attr('opacity', 0);
+
+     }
+
+
+    /**
+     * showLocationModel - how to use vis and what is location model
      *
+     * hides: none
+     * shows: intro title
+     * hides: workspace rect
+     */
+     function showLocationModel(){
+
+          hideElement('.workspace');
+
+     }
+    
+
+    /**
+     * showWorkspace - workspace rectangle
+     *
+     * hides: location model intro
+     * shows: workspace rect
+     * hides: index rect
      */
     function showWorkspace() {
-        hideElement('.vis-title');
 
         g.selectAll(".workspace")
           .transition()
@@ -329,6 +305,13 @@ var scrollVis = function(){
     }
 
 
+    /**
+     * showIndex - index rectangle
+     *
+     * hides: none
+     * shows: index rect
+     * hides: local rep rect
+     */
     function showIndex() {
 
        g.selectAll(".indexspace")
@@ -338,23 +321,39 @@ var scrollVis = function(){
             .attr("y",0)
             .attr('opacity', 1);
 
-      hideElement('.local-rep');
+        hideElement('.local-rep');
     }
 
+
+    /**
+     * showLocalRep - local rep rectangle
+     *
+     * hides: none
+     * shows: local rep rect
+     * hides: remote rep rect
+     */
     function showLocalRep() {
-       g.selectAll(".local-rep")
+
+        g.selectAll(".local-rep")
             .transition()
             .duration(600)
             .attr("x",450)
             .attr("y",0)
             .attr('opacity', 1);
 
-      hideElement('.remote-rep');
+        hideElement('.remote-rep');
 
     }
 
-    function showRemoteRep() {
 
+    /**
+     * showRemoteRep - remote rep rect rectangle
+     *
+     * hides: none
+     * shows: remote rep rect
+     * hides: stash rect
+     */
+    function showRemoteRep() {
        g.selectAll(".remote-rep")
             .transition()
             .duration(600)
@@ -362,11 +361,17 @@ var scrollVis = function(){
             .attr("y",0)
             .attr('opacity', 1);
 
-       g.selectAll(".stash")
-            .transition()
-            .duration(600)
-            .attr('opacity', 0);
+        hideElement('.stash');
     }
+
+
+    /**
+     * showStash - stash rectangle
+     *
+     * hides: none
+     * shows: stash rectangle
+     * hides: 
+     */
 
     function showStash() {
        g.selectAll(".stash")
@@ -377,58 +382,62 @@ var scrollVis = function(){
             .attr('opacity', 1);
     }
 
-    /**
-     * highlightGrid - show fillers in grid
-     *
-     * hides: barchart, text and axis
-     * shows: square grid and highlighted
-     *  filler words. also ensures squares
-     *  are moved back to their place in the grid
-     */
 
     /**
-     * showBar - barchart
+     * showCommandsIntro - upstream and downstream
      *
-     * hides: square grid
-     * hides: histogram
-     * shows: barchart
-     *
-     */
-    /**
-     * showHistAll - show all histogram
-     *
-     * hides: cough title and color
-     * (previous step is also part of the
-     *  histogram, so we don't have to hide
-     *  that)
-     * shows: all histogram bars
-     *
-     */
+     * hides: ??
+     * shows: commands intro elements
+     * hides:
+     */    
+    function showCommandsIntro(){
 
-    /**
-     * showAxis - helper function to
-     * display particular xAxis
-     *
-     * @param axis - the axis to show
-     *  (xAxisHist or xAxisBar)
-     */
-    function showAxis(axis) {
-        g.select('.axis')
-          .call(axis)
-          .transition().duration(500)
-          .style('opacity', 1);
     }
 
     /**
-     * hideAxis - helper function
-     * to hide the axis
+     * showUpstreamCommands - add, commit, push
      *
-     */
-    function hideAxis() {
-        g.select('.axis')
-          .transition().duration(500)
-          .style('opacity', 0);
+     * hides: 
+     * shows: upstream command elements
+     * hides:
+     */    
+    function showUpstreamCommands(){
+
     }
+
+    /**
+     * showDownstreamCommands - revert, rebase, pull
+     *
+     * hides: 
+     * shows: downstream command elements
+     * hides:
+     */    
+    function showDownstreamCommands(){
+
+    }
+
+    /**
+     * showStashCommands - stash, apply, drop
+     *
+     * hides: 
+     * shows:  stash command elements - 
+     * hides:
+     */
+    function showStashCommands(){
+
+    }
+
+    /**
+     * showExplore - interactive open-ended play area
+     *
+     * hides: 
+     * shows: interactive elements - 
+     * hides:
+     */
+    function showExplore(){
+
+    }
+
 
     /**
      * UPDATE FUNCTIONS
@@ -442,31 +451,9 @@ var scrollVis = function(){
      *
      */
 
-    /**
-     * updateCough - increase/decrease
-     * cough text and color
-     *
-     * @param progress - 0.0 - 1.0 -
-     *  how far user has scrolled in section
-     */
-    function updateCough(progress) {
-        g.selectAll('.cough')
-          .transition()
-          .duration(0);
-          // .attr('opacity', progress);
-
-        // g.selectAll('.hist')
-        //   .transition('cough')
-        //   .duration(0)
-        //   .style('fill', function (d) {
-        //     return (d.x0 >= 14) ? coughColorScale(progress) : '#008080';
-        //   });
-    }
-
 
    /**
-     * activate -
-     *
+     * activate - function to activate particular section
      * @param index - index of the activated section
      */
     chart.activate = function (index) {
@@ -539,3 +526,4 @@ function display() {
 
 // set up scroll and display
 display();
+console.log("End of SECTIONS.JS");
