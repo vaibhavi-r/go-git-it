@@ -1,3 +1,10 @@
+/**
+Snippet: Force page scroll position to top on page refresh
+**/
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+
 
 /**
  * scroller - handles the details
