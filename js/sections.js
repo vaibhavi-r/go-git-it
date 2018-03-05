@@ -59,6 +59,17 @@ var scrollVis = function(){
     // progress through the section.
     var updateFunctions = [];
 
+    /*
+    GLOBAL VARIABLES FOR GIT STATES, x, y position
+    */
+    var states = {};
+    states["stash"] = {}
+    states["workspace"] = {}
+    states["indexspace"] = {}
+    states["local-rep"] = {}
+    states["remote-rep"] = {}
+
+
 
     /**
      * chart
@@ -142,7 +153,6 @@ var scrollVis = function(){
               .attr('opacity',op);
         }
 
-
         var w = width/10;
         var h = height*4.5/10; 
         //Create Rectangles for Different Locations for Content Model
@@ -196,10 +206,10 @@ var scrollVis = function(){
         var points = getPoints();
 
 
-        var path = svg.append("path")
-            .data([points])
-            .attr("d", d3.line().curve(d3.curveCatmullRomOpen));
-            // .interpolate("cardinal-closed"));
+        //var path = svg.append("path")
+        //    .data([points])
+        //    .attr("d", d3.line().curve(d3.curveCatmullRomOpen));
+        //    // .interpolate("cardinal-closed"));
 
         
         console.log("....END Setup Vis")
@@ -262,30 +272,31 @@ var scrollVis = function(){
      * user may be scrolling up or down).
      *
      */
-
-
-   function hideElement(domTag){
+   var hideElement = function(domTag){
           g.selectAll(domTag)
           .transition()
           .duration(100)
           .attr('opacity', 0);
     }
 
-    function showElement(domTag){
+    var showElement = function(domTag){
         g.selectAll(domTag)
           .transition()
           .duration(600)
           .attr('opacity', 1);
     }
 
-    function showRectangle(domTag, x, y){
+    showRectangle = function(domTag, x, y){
         g.selectAll(domTag)
           .transition()
           .duration(600)
+          .delay(500)
           .attr("x",xScale(x))
           .attr("y",yScale(y))
           .attr('opacity', 1);
     }
+
+
 
 
     /**
@@ -295,8 +306,7 @@ var scrollVis = function(){
      * shows: landing title
      * hides: 
      */
-    function showTitle() {
-
+    var showTitle = function() {
         g.selectAll('.vis-title')
           .transition()
           .duration(600)
@@ -314,7 +324,7 @@ var scrollVis = function(){
      * hides: location model
      */
 
-     function showGitIntro(){
+     var showGitIntro = function(){
         //Insert Images for Github
         hideElement('.vis-title');
 
@@ -328,7 +338,6 @@ var scrollVis = function(){
           .attr("opacity", 1);
      }
 
-
     /**
      * showLocationModel - how to use vis and what is location model
      *
@@ -338,7 +347,7 @@ var scrollVis = function(){
      */
      function showLocationModel(){
 
-          //hideElement('.picture');
+          hideElement('.picture');
 
           function transition() {
             d3.select('.picture').transition()
@@ -360,7 +369,6 @@ var scrollVis = function(){
           }
 
           hideElement('.workspace');
-
      }
     
 
@@ -371,7 +379,7 @@ var scrollVis = function(){
      * shows: workspace rect
      * hides: index rect
      */
-    function showWorkspace() {
+    var showWorkspace = function() {
         showRectangle('.workspace',25,65);
         hideElement('.indexspace');
     }
@@ -384,7 +392,7 @@ var scrollVis = function(){
      * shows: index rect
      * hides: local rep rect
      */
-    function showIndex() {
+    var showIndex = function() {
         showRectangle('.indexspace',45,65);
         hideElement('.local-rep');
     }
@@ -397,8 +405,7 @@ var scrollVis = function(){
      * shows: local rep rect
      * hides: remote rep rect
      */
-    function showLocalRep() {
-
+    var showLocalRep = function() {
         showRectangle('.local-rep',65,65);
         hideElement('.remote-rep');
 
@@ -412,7 +419,7 @@ var scrollVis = function(){
      * shows: remote rep rect
      * hides: stash rect
      */
-    function showRemoteRep() {
+    var showRemoteRep = function() {
         showRectangle('.remote-rep',85,65);
         hideElement('.stash');
     }
@@ -426,7 +433,7 @@ var scrollVis = function(){
      * hides: 
      */
 
-    function showStash() {
+    var showStash = function() {
         showRectangle('.stash',5,65);
     }
 
@@ -438,7 +445,7 @@ var scrollVis = function(){
      * shows: commands intro elements
      * hides:
      */    
-    function showCommandsIntro(){
+    var showCommandsIntro = function(){
 
     }
 
@@ -449,7 +456,7 @@ var scrollVis = function(){
      * shows: upstream command elements
      * hides:
      */    
-    function showUpstreamCommands(){
+    var showUpstreamCommands = function(){
 
     }
 
@@ -460,7 +467,7 @@ var scrollVis = function(){
      * shows: downstream command elements
      * hides:
      */    
-    function showDownstreamCommands(){
+    var showDownstreamCommands = function(){
 
     }
 
@@ -471,7 +478,7 @@ var scrollVis = function(){
      * shows:  stash command elements - 
      * hides:
      */
-    function showStashCommands(){
+    var showStashCommands = function(){
 
     }
 
@@ -572,6 +579,36 @@ function display() {
     console.log(".END display function")
 }
 
+
+
+
+/*  UI Event Logic Implementation
+    Functions to execute event logic when fired by event handler
+*/
+var showRectangle;
+var showAllRects = function (){
+    console.log("Showing All Rects!");
+    showRectangle('.workspace',25,65);
+    showRectangle('.indexspace',45,65);
+    showRectangle('.remote-rep',85,65);
+    showRectangle('.local-rep',65,65);
+    showRectangle('.stash',5,65);
+}
+
+
+/*  UI Event Handlers
+
+    Attaching Event Handlers and Listeners to user-driven elements in the story
+*/
+
+$('#loc-model-rect-link').click(function(){ console.log('Link clicked!');
+                                            showAllRects(); return false; }
+                                );
+
+
+
 // set up scroll and display
 display();
+//initializeUIHandlers();
+
 console.log("End of SECTIONS.JS");
