@@ -141,6 +141,25 @@ var scrollVis = function(){
           .attr('opacity', 0);
 
         //Function to create rectangle with given dimensions, fill and opacity
+        var createText = function(className,id, txt, x, y, op)
+        {
+            g.append("text")
+              .attr("class", className)
+              .attr("id",id)
+              .attr("x", xScale(x))
+              .attr("y", yScale(y))
+              .attr('opacity',op)
+              .text(txt);
+        }
+
+        createText("space-text","workspace-text","Workspace",25,75,0);
+        createText("space-text","index-text","Index",45,75,0);
+        createText("space-text","localrep-text","Local Repo",65,75,0);
+        createText("space-text","remoterep-text","Remote Repo",85,75,0);
+        createText("space-text","stash-text","Stash",5,75,0);
+
+
+        //Function to create rectangle with given dimensions, fill and opacity
         var createRect = function(className, x, y, w, h, color, op)
         {
             g.append("rect")
@@ -179,7 +198,9 @@ var scrollVis = function(){
 
         //Create Images for each picture that might be on the screen 
              
-        createImage("/src/images/git_icon.svg",    "icon", "git-icon", "git icon", 50, 65, 100, 100, 0);
+        createImage("/src/images/git_icon.svg",    "icon picture", "git-icon", "git icon", 30, 100, 400, 400, 0);
+        createImage("/src/images/places_model.svg", "places", "places-model", "places model", 0, 100, 850, 340, 0);
+
 
         //@global
         w_file = width/10;
@@ -301,11 +322,21 @@ var scrollVis = function(){
         g.selectAll(domTag)
           .transition()
           .duration(600)
-          .delay(500)
+          .delay(200)
           .attr("x",xScale(x))
           .attr("y",yScale(y))
           .attr('opacity', 1);
     }
+    // @Global
+    showText = function(domTag, x, y){
+        g.selectAll(domTag)
+          .transition()
+          .duration(600)
+          .delay(300)
+          .attr('opacity', 1);
+    }
+
+
 
 
 
@@ -342,11 +373,9 @@ var scrollVis = function(){
         g.select(".picture")
           .transition()
           .duration(500)
-          .attr("x", 100)
-          .attr("y",0)
-          .attr("width", 150)
-          .attr("height", 150)
           .attr("opacity", 1);
+
+        hideElement('.places');
      }
 
     /**
@@ -379,7 +408,19 @@ var scrollVis = function(){
 
           }
 
+          g.select(".places")
+          .transition()
+          .duration(500)
+          .attr("opacity", 1);
+
+
           hideElement('.workspace');
+
+          hideElement('#workspace-text');
+          hideElement('#index-text');
+          hideElement('#localrep-text');
+          hideElement('#remoterep-text');
+          hideElement('#stash-text');
      }
     
 
@@ -391,8 +432,13 @@ var scrollVis = function(){
      * hides: index rect
      */
     var showWorkspace = function() {
+
         showRectangle('.workspace',25,65);
         hideElement('.indexspace');
+        showText('#workspace-text');
+        hideElement('#index-text');
+
+        hideElement('.places');
     }
 
 
@@ -406,6 +452,8 @@ var scrollVis = function(){
     var showIndex = function() {
         showRectangle('.indexspace',45,65);
         hideElement('.local-rep');
+        showText('#index-text');
+        hideElement('#localrep-text');
     }
 
 
@@ -419,7 +467,8 @@ var scrollVis = function(){
     var showLocalRep = function() {
         showRectangle('.local-rep',65,65);
         hideElement('.remote-rep');
-
+        showText('#localrep-text');
+        hideElement('#remoterep-text');
     }
 
 
@@ -433,6 +482,8 @@ var scrollVis = function(){
     var showRemoteRep = function() {
         showRectangle('.remote-rep',85,65);
         hideElement('.stash');
+        showText('#remoterep-text');
+        hideElement('#stash-text');
     }
 
 
@@ -446,6 +497,7 @@ var scrollVis = function(){
 
     var showStash = function() {
         showRectangle('.stash',5,65);
+        showText('#stash-text');
     }
 
 

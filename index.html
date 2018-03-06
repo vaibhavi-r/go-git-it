@@ -20,44 +20,41 @@
           <p>
           </p>
           This project's goal is to essentially demystify the Git version control system. 
-          If you are new to Git and. If you ever wondered about the underlying process, you're at the right place. 
+          If you are new to Git and if you ever wondered about the underlying process, you're at the right place. 
   
           </p>  
 <!--           <h4>The Aim</h4> -->
-          <p>Scroll down to learn about the Git Content Model, an intuitive way to understand basic Git commands and play with the interactive visualization and test yourself at the end.
+          <p>Scroll down to learn about the Git Content Model, an intuitive way to understand basic Git commands and play with the interactive visualization.
           </p>
       </section>
 
       <section class="step git-intro-sec">
         <div class="title">So, what is Git?</div>
-          Git is a type of version control system (VCS) that makes it easier to track changes to files. For example, when you edit a file, git can help you determine exactly what changed, who changed it, and why.
-          
+          Git is a type of version control system (VCS) that makes it easier to track changes to files. For example, when you edit a file, git can help you determine exactly what changed, who changed it, and why. 
+          <br><br>
+          <strong>What makes git unique?</strong><br>
+          <ul>
+            <li>Git branches are cheap and easy to merge. This facilitates the feature branch workflow popular with many Git users.</li>
+            <li>Git is a distributed version control system. Every user gets their own local repository, complete with a full history of commits.</li>
+            <li>Having a full local history makes Git fast, since it means you don’t need a network connection to create commits, inspect previous versions of a file, or perform diffs between commits.</li>
+          </ul>
+  
 
-          Git is a version control system for speed integrity and collaboration.
-          What makes git unique
-
-          The Locations Model Tutorial
-          A short tutorial on the Git Content Model. Learn Git commands in the context of where the code changes happen.
-
-          Collaboration Scenarios
-          Even if one is comfortable with the commands, many. Test yourself with three common situations that arise when working with Git in teams.
-
-          Why do people use git. 
-
-          Why do people use git?
-          Speed, Integrity, Collaboration
 
       </section>
 
       <section class="step location-model-sec">
         <div class="title">Git Location Model</div>
-          What is it?.<br/><br/>
+          Git Structure<br/><br/>
           Where does git store your code. Contrary to what you'd think, it's not just your computer and the cloud. 
-          Source code exists on 5 different locations, scroll down to learn about.          
-          Workspace, 
-          Index
-          Local Repo
-          Remote Repo
+          In Git, there are five places your source can exist: 
+          <ul>
+            <li>A Stash</li>
+            <li>A Local working directory.</li>
+            <li>An Index (or staging area)</li>
+            <li>a local repository</li>
+            <li>A remote repository</li>
+          </ul>
 
            <a nohref id="loc-model-rect-link" class="dotty"> Click to see the locations</a>
 
@@ -70,17 +67,17 @@
 
       <section class="step index-sec">
         <div class="title">Index</div>
-        Lorem Ipsum Shistum
+        Files you want to commit. Before you “commit” (checkin) files, you need to first add them to the index. Also called "current directory cache", "staging area", "cache" or "staged files".
       </section>
 
       <section class="step local-rep-sec">
         <div class="title">Local Repository</div>
-        Lorem Ipsum Shistum
+        Git local repository is the one on which we will make local changes, typically this local repository is on our computer.
       </section>
 
       <section class="step remote-rep-sec">
         <div class="title">Remote Repository</div>
-        Lorem Ipsum Shistum
+        Git remote repository is the one of the server.
       </section>
 
       <section class="step stash-sec">
