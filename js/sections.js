@@ -715,6 +715,45 @@ var gitPushAnimation = function(){
                     .attr("opacity",1)
 };
 
+var gitOthersPushAnimation = function(){
+    pushedFile = d3.select('#file4')
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(0))
+                    .attr("opacity",1)
+                      .transition()
+                      .duration(2000)
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1);
+}
+
+var gitFetchAnimation = function(){
+    // newFile = d3.select('#file1')
+    //             .attr("x", xScale(25))
+    //             .attr("y", yScale(50))
+    //             .attr("opacity",1);
+
+    // addedFile = d3.select('#file2')
+    //               .attr("x", xScale(45))
+    //               .attr("y", yScale(50))
+    //               .attr("opacity",0);
+
+    pushedFile = d3.select('#file4')
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1);
+
+    fetchedFile = d3.select('#file3')
+                      .attr("x", xScale(80))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1)
+                        .transition()
+                        .duration(1500)
+                      .attr("x", xScale(65))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1)
+};
+
 var resetAnimation = function(){
   d3.selectAll('.file-icon')
       .transition()
@@ -738,7 +777,7 @@ $('#upstream-commit-link').click(function(){ gitCommitAnimation(); return false;
 $('#upstream-push-link').click(function(){ gitPushAnimation(); return false; });
 
 //Downstream Commands - create, add, commit, push
-$('#downstream-edit-link').click(function(){ createNewFileAnimation(); return false; });
+$('#downstream-others-push-link').click(function(){ gitOthersPushAnimation(); return false; });
 $('#downstream-fetch-link').click(function(){ gitFetchAnimation(); return false; });
 $('#downstream-merge-link').click(function(){ gitMergeAnimation(); return false; });
 $('#downstream-pull-link').click(function(){ gitPullAnimation(); return false; });
