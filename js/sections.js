@@ -166,10 +166,10 @@ var scrollVis = function(){
         //@global
         w_file = width/10;
         h_file = w_file;   
-        createImage("/src/images/file-green.svg",  "icon file-icon", "file1", "git icon", 25, 0, w_file, h_file, 0);
-        createImage("/src/images/file-black.svg",  "icon file-icon", "file2", "git icon", 30, 50, w_file, h_file, 0);
-        createImage("/src/images/file-red.svg",    "icon file-icon", "file3", "git icon", 50, 50, w_file, h_file, 0);
-        createImage("/src/images/file-yellow.svg", "icon file-icon", "file4", "git icon", 70, 50, w_file, h_file, 0);
+        createImage("/src/images/file-green.svg",  "icon file-icon", "file1", "git icon", 0, 0, w_file, h_file, 0);
+        createImage("/src/images/file-black.svg",  "icon file-icon", "file2", "git icon", 0, 50, w_file, h_file, 0);
+        createImage("/src/images/file-red.svg",    "icon file-icon", "file3", "git icon", 0, 50, w_file, h_file, 0);
+        createImage("/src/images/file-yellow.svg", "icon file-icon", "file4", "git icon", 0, 50, w_file, h_file, 0);
 
 
         /*
@@ -630,6 +630,7 @@ var showAllRects = function (){
     showRectangle('.stash',5,65);
 }
 
+/* UPSTREAM COMMANDS*/
 var createNewFileAnimation = function()
 {
     newFile = d3.select('#file1')
@@ -689,73 +690,290 @@ var gitCommitAnimation = function(){
 
 var gitPushAnimation = function(){
 
-    newFile = d3.select('#file1')
+    newFile = d3.select('#file1')  //color 1
                 .attr("x", xScale(25))
                 .attr("y", yScale(50))
                 .attr("opacity",1);
 
-    addedFile = d3.select('#file2')
+    addedFile = d3.select('#file2') //color 1
                   .attr("x", xScale(45))
                   .attr("y", yScale(50))
                   .attr("opacity",0);
 
-    committedFile = d3.select('#file3')
+    committedFile = d3.select('#file3') //color 1
                       .attr("x", xScale(65))
                       .attr("y", yScale(50))
                       .attr("opacity",1);
 
-    pushedFile = d3.select('#file4')
+    pushedFile = d3.select('#file4')   //color 1
                     .attr("x", xScale(70))
                     .attr("y", yScale(50))
                     .attr("opacity",1)
                       .transition()
                       .duration(1500)
-                    .attr("x", xScale(85))
+                    .attr("x", xScale(85))  //color 1
                     .attr("y", yScale(50))
                     .attr("opacity",1)
 };
 
+/* DOWNSTREAM COMMANDS*/
 var gitOthersPushAnimation = function(){
-    pushedFile = d3.select('#file4')
+    file = d3.select('#file1')
+                    .attr("x", xScale(25))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1);  //color 1
+
+    committedFile = d3.select('#file2')
+                    .attr("x", xScale(65))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 1
+
+    pushedFile = d3.select('#file3')
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 1
+
+    incomingFile = d3.select('#file4')
                     .attr("x", xScale(85))
                     .attr("y", yScale(0))
-                    .attr("opacity",1)
+                    .attr("opacity",1)  //color 2
                       .transition()
                       .duration(2000)
                     .attr("x", xScale(85))
                     .attr("y", yScale(50))
-                    .attr("opacity",1);
+                    .attr("opacity",1);  //color 3
 }
 
 var gitFetchAnimation = function(){
-    // newFile = d3.select('#file1')
-    //             .attr("x", xScale(25))
-    //             .attr("y", yScale(50))
-    //             .attr("opacity",1);
+    file = d3.select('#file1')
+                    .attr("x", xScale(25))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 1
 
-    // addedFile = d3.select('#file2')
-    //               .attr("x", xScale(45))
-    //               .attr("y", yScale(50))
-    //               .attr("opacity",0);
+    committedFile = d3.select('#file2')
+                    .attr("x", xScale(65))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 1
 
-    pushedFile = d3.select('#file4')
+    pushedFile = d3.select('#file3')
                     .attr("x", xScale(85))
                     .attr("y", yScale(50))
-                    .attr("opacity",1);
+                    .attr("opacity",1); //color 3
 
-    fetchedFile = d3.select('#file3')
+    incomingFetchFile = d3.select('#file4') 
                       .attr("x", xScale(80))
                       .attr("y", yScale(50))
-                      .attr("opacity",1)
+                      .attr("opacity",1) //color 3
                         .transition()
                         .duration(1500)
                       .attr("x", xScale(65))
                       .attr("y", yScale(50))
-                      .attr("opacity",1)
+                      .attr("opacity",1) 
 };
 
+
+var gitMergeAnimation = function(){
+    file = d3.select('#file1')
+                    .attr("x", xScale(25))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 1
+
+    committedFile = d3.select('#file2')
+                    .attr("x", xScale(65))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 3
+
+    pushedFile = d3.select('#file3')
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 3
+
+    incomingMergeFile = d3.select('#file4') 
+                      .attr("x", xScale(60))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1) //color 3
+                        .transition()
+                        .duration(1500)
+                      .attr("x", xScale(25))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1);
+};
+
+
+var gitPullAnimation = function(){
+
+    file = d3.select('#file1')
+                    .attr("x", xScale(25))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 1
+
+    committedFile = d3.select('#file2')
+                    .attr("x", xScale(65))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 1
+
+    pushedFile = d3.select('#file3')
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 1
+
+    incomingFetchFile = d3.select('#file4') 
+                      .attr("x", xScale(80))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1) //color 3
+                        .transition()
+                        .duration(1500)
+                      .attr("x", xScale(65))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1); //color 3
+
+    incomingMergeFile = d3.select('#file2')
+                    .attr("x", xScale(65))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1) //color 3
+                      .transition()
+                      .delay(1500)
+                      .duration(1500)
+                    .attr("x", xScale(25))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1); //color 3
+
+};
+
+/* STASH COMMANDS*/
+var gitStashAnimation = function(){
+    stashedFile = d3.select('#file1');
+    if(stashedFile.attr('opacity') == 1 && stashedFile.attr('x') >= xScale(25))
+    {
+      console.log('Edited File in Working Directory');
+      stashedFile.attr("x", xScale(25))
+                  .attr("y", yScale(40))
+                  .attr("opacity",1) //new file
+                    .transition()
+                    .duration(1500)
+                  .attr("x", xScale(5))
+                  .attr("y", yScale(40))
+                  .attr("opacity",1); //edit file
+     }
+     else
+     {
+        console.log('No untracked file to stash in working directory!');
+     }
+}
+
+var gitStashPopAnimation = function(){
+    stashedFile = d3.select('#file1');
+    if(stashedFile.attr('opacity') == 1 && stashedFile.attr('x') == xScale(5)){
+          console.log('Popping from stash!');
+
+        stashedFile.attr("x", xScale(5))
+                   .attr("y", yScale(40))
+                   .attr("opacity",1) //edit file
+                      .transition()
+                      .duration(1500)
+                    .attr("x", xScale(25))
+                    .attr("y", yScale(40))
+                    .attr("opacity",1); //edit file
+
+        popFile = d3.select('#file2')
+                    .attr("x", xScale(5))
+                    .attr("y", yScale(40))
+                    .attr("opacity",1) //edit file
+                      .transition()
+                      .duration(2000)
+                    .attr("opacity",0);
+        }
+    else{
+          console.log('No file to pop from stash!');
+        }
+}
+
+var gitStashPullAnimation = function()
+{
+    var editFilePos = d3.select('#file1').attr('x');
+    if(editFilePos <= xScale(5))
+    {
+        console.log('Working Tree is CLEAN');
+        incomingFetchFile = d3.select('#file4')
+                        .attr("x", xScale(85))
+                        .attr("y", yScale(60))
+                        .attr("opacity",1)  //other file
+                          .transition()
+                          .duration(1500)
+                        .attr("x", xScale(65))
+                        .attr("y", yScale(60))
+                        .attr("opacity",1);  //other
+
+        incomingMergeFile = d3.select('#file3')
+                        .attr("x", xScale(65))
+                        .attr("y", yScale(60))
+                        .attr("opacity",0)  //other file
+                          .transition()
+                          .delay(1500)
+                          .duration(1500)
+                        .attr("x", xScale(25))
+                        .attr("y", yScale(60))
+                        .attr("opacity",1);  //other
+    }
+    else
+    {
+        easement = d3.easeBounce;
+        console.log('Working Tree is DIRTY');
+        remote = d3.select('#file4')
+                        .attr("x", xScale(85))
+                        .attr("y", yScale(60))
+                        .attr("opacity",1)  //other file
+                          .transition()
+                          .duration(500)
+                          .ease(easement)
+                        .attr("x", xScale(80))
+                        .attr("y", yScale(60))
+                        .attr("opacity",1)  //other
+                          .transition()
+                          .duration(500)
+                          .ease(easement)
+                        .attr("x", xScale(90))
+                        .attr("y", yScale(60))
+                        .attr("opacity",1)  //other
+                          .transition()
+                          .ease(easement)
+                          .duration(500)
+                        .attr("x", xScale(85))
+                        .attr("y", yScale(60))
+                        .attr("opacity",1);  //other
+    }
+}
+
+var gitEditAnimation = function()
+{
+    editFile = d3.select('#file1')
+                .attr("x", xScale(25))
+                .attr("y", yScale(100))
+                .attr("opacity",1) //new file
+                  .transition()
+                  .duration(1500)
+                .attr("x", xScale(25))
+                .attr("y", yScale(40))
+                .attr("opacity",1); //edit file
+
+    incomingFile = d3.select('#file4')
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(0))
+                    .attr("opacity",1)  //other file
+                      .transition()
+                      .delay(1500)
+                      .duration(2000)
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(60))
+                    .attr("opacity",1);  //other
+}
+
+
+/* FILE COMMANDS*/
 var resetAnimation = function(){
   d3.selectAll('.file-icon')
+      .attr('x',xScale(0))
+      .attr('y',yScale(0))
       .transition()
       .duration(300)
     .attr("opacity", 0);
@@ -783,11 +1001,10 @@ $('#downstream-merge-link').click(function(){ gitMergeAnimation(); return false;
 $('#downstream-pull-link').click(function(){ gitPullAnimation(); return false; });
 
 //Up + Down  Commands - New File, Stash, Apply, Pull, Pop
-$('#updown-stash-link').click(function(){ createNewFileAnimation(); return false; });
-$('#updown-create-link').click(function(){ gitAddAnimation(); return false; });
-$('#updown-apply-link').click(function(){ gitCommitAnimation(); return false; });
-$('#updown-pull-link').click(function(){ gitPushAnimation(); return false; });
-$('#updown-pop-link').click(function(){ gitPushAnimation(); return false; });
+$('#updown-stash-link').click(function(){ gitStashAnimation(); return false; });
+$('#updown-edit-link').click(function(){ gitEditAnimation(); return false; });
+$('#updown-pull-link').click(function(){ gitStashPullAnimation(); return false; });
+$('#updown-pop-link').click(function(){ gitStashPopAnimation(); return false; });
 
 
 // set up scroll and display
