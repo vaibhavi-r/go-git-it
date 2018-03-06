@@ -9,12 +9,6 @@ console.log("Welcome to SECTIONS.JS");
 
 var scrollVis = function(){
     console.log("..Scroll Vis function");
-    // constants to define the size
-    // and margins of the vis area.
-    var width = 800;
-    var height = 520;
-    var margin = { top: 20, left: 20, bottom: 20, right: 20 };
-
 
     // Keep track of which visualization
     // we are on and which was the last
@@ -58,18 +52,6 @@ var scrollVis = function(){
     // through the section with the current
     // progress through the section.
     var updateFunctions = [];
-
-    /*
-    GLOBAL VARIABLES FOR GIT STATES, x, y position
-    */
-    var states = {};
-    states["stash"] = {}
-    states["workspace"] = {}
-    states["indexspace"] = {}
-    states["local-rep"] = {}
-    states["remote-rep"] = {}
-
-
 
     /**
      * chart
@@ -205,10 +187,10 @@ var scrollVis = function(){
         //@global
         w_file = width/10;
         h_file = w_file;   
-        createImage("/src/images/file-green.svg",  "icon file-icon", "file-green", "git icon", 20, 0, w_file, h_file, 0);
-        createImage("/src/images/file-black.svg",  "icon file-icon", "file-black", "git icon", 20, 0, w_file, h_file, 0);
-        createImage("/src/images/file-red.svg",    "icon file-icon", "file-red", "git icon", 20, 0, w_file, h_file, 0);
-        createImage("/src/images/file-yellow.svg", "icon file-icon", "file-yellow", "git icon", 20, 0, w_file, h_file, 0);
+        createImage("/src/images/file-green.svg",  "icon file-icon", "file1", "git icon", 25, 0, w_file, h_file, 0);
+        createImage("/src/images/file-black.svg",  "icon file-icon", "file2", "git icon", 30, 50, w_file, h_file, 0);
+        createImage("/src/images/file-red.svg",    "icon file-icon", "file3", "git icon", 50, 50, w_file, h_file, 0);
+        createImage("/src/images/file-yellow.svg", "icon file-icon", "file4", "git icon", 70, 50, w_file, h_file, 0);
 
 
         /*
@@ -389,24 +371,24 @@ var scrollVis = function(){
 
           hideElement('.picture');
 
-          function transition() {
-            d3.select('.picture').transition()
-                .duration(10000)
-                .attrTween("transform", translateAlong(path.node()))
-                .each("end", transition);
-          }
+          // function transition() {
+          //   d3.select('.picture').transition()
+          //       .duration(10000)
+          //       .attrTween("transform", translateAlong(path.node()))
+          //       .each("end", transition);
+          // }
 
-          // Returns an attrTween for translating along the specified path element.
-          function translateAlong(path) {
-            var l = path.getTotalLength();
-            return function(d, i, a) {
-              return function(t) {
-                var p = path.getPointAtLength(t * l);
-                return "translate(" + p.x + "," + p.y + ")";
-              };
-            };
+          // // Returns an attrTween for translating along the specified path element.
+          // function translateAlong(path) {
+          //   var l = path.getTotalLength();
+          //   return function(d, i, a) {
+          //     return function(t) {
+          //       var p = path.getPointAtLength(t * l);
+          //       return "translate(" + p.x + "," + p.y + ")";
+          //     };
+          //   };
 
-          }
+          // }
 
           g.select(".places")
           .transition()
@@ -424,6 +406,7 @@ var scrollVis = function(){
      }
     
 
+
     /**
      * showWorkspace - workspace rectangle
      *
@@ -439,6 +422,9 @@ var scrollVis = function(){
         hideElement('#index-text');
 
         hideElement('.places');
+        hideElement('.local-rep');
+        hideElement('.remote-rep');
+        hideElement('.stash');
     }
 
 
@@ -469,6 +455,7 @@ var scrollVis = function(){
         hideElement('.remote-rep');
         showText('#localrep-text');
         hideElement('#remoterep-text');
+
     }
 
 
@@ -486,7 +473,6 @@ var scrollVis = function(){
         hideElement('#stash-text');
     }
 
-
     /**
      * showStash - stash rectangle
      *
@@ -494,7 +480,6 @@ var scrollVis = function(){
      * shows: stash rectangle
      * hides: 
      */
-
     var showStash = function() {
         showRectangle('.stash',5,65);
         showText('#stash-text');
@@ -509,6 +494,7 @@ var scrollVis = function(){
      * hides:
      */    
     var showCommandsIntro = function(){
+        hideElement('.file-icon');
 
     }
 
@@ -531,6 +517,7 @@ var scrollVis = function(){
      * hides:
      */    
     var showDownstreamCommands = function(){
+        hideElement('.file-icon');
 
     }
 
@@ -647,14 +634,43 @@ function display() {
     Functions and variables needed for user-driven events and maintaining state
 */
 
+// DIMENSIONAL constants to define the size
+// and margins of the vis area.
+var width = 800;
+var height = 520;
+var margin = { top: 20, left: 20, bottom: 20, right: 20 };
+
+
+var w, h; //rectangle dims
+var w_file, h_file; //file icon dims
+
+/*
+    GLOBAL Dictionaries FOR GIT STATES, x, y position
+*/
+    var states = {};
+    states["stash"] = {}
+    states["workspace"] = {}
+    states["indexspace"] = {}
+    states["local-rep"] = {}
+    states["remote-rep"] = {}
+
+
+
+/*
+    GLOBAL Scales and Functions
+*/
 var showRectangle;
 var xScale;
 var yScale;
 var xAxis;
 var yAxis;
 
-var w, h; //rectangle dims
-var w_file, h_file; //file icon dims
+var newFile;
+var addedFile;
+var committedFile;
+var pushedFile;
+
+
 
 /*  UI Event Logic Implementation
     Functions to execute event logic when fired by event handler
@@ -670,28 +686,162 @@ var showAllRects = function (){
 
 var createNewFileAnimation = function()
 {
-    var newFile = d3.select('#file-green');
-    newFile.transition()
-            .duration(500)
-            .attr("x", xScale(30))
-            .attr("y", yScale(50))
-            .attr("opacity",1);
+    newFile = d3.select('#file1')
+                .attr("x", xScale(25))
+                .attr("y", yScale(100))
+                .attr("opacity",1)
+                  .transition()
+                  .duration(1500)
+                .attr("x", xScale(25))
+                .attr("y", yScale(50))
+                .attr("opacity",1);
 };
 
-var gitAdd = function(){};
-var gitCommit = function(){};
-var gitPush = function(){};
+var gitAddAnimation = function(){
+
+    newFile = d3.select('#file1')
+                .attr("x", xScale(25))
+                .attr("y", yScale(50))
+                .attr("opacity",1);
+
+
+    addedFile = d3.select('#file2')
+                  .attr("x", xScale(30))
+                  .attr("y", yScale(50))
+                    .transition()
+                    .duration(1500)
+                  .attr("x", xScale(45))
+                  .attr("y", yScale(50))
+                  .attr("opacity",1);
+};
+
+var gitCommitAnimation = function(){
+
+    newFile = d3.select('#file1')
+                .attr("x", xScale(25))
+                .attr("y", yScale(50))
+                .attr("opacity",1);
+
+    addedFile = d3.select('#file2')
+                  .attr("x", xScale(45))
+                  .attr("y", yScale(50))
+                  .attr("opacity",1)
+                    .transition()
+                    .duration(500)
+                  .attr("opacity",0);
+
+    committedFile = d3.select('#file3')
+                      .attr("x", xScale(50))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1)
+                        .transition()
+                        .duration(1500)
+                      .attr("x", xScale(65))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1);
+};
+
+var gitPushAnimation = function(){
+
+    newFile = d3.select('#file1')
+                .attr("x", xScale(25))
+                .attr("y", yScale(50))
+                .attr("opacity",1);
+
+    addedFile = d3.select('#file2')
+                  .attr("x", xScale(45))
+                  .attr("y", yScale(50))
+                  .attr("opacity",0);
+
+    committedFile = d3.select('#file3')
+                      .attr("x", xScale(65))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1);
+
+    pushedFile = d3.select('#file4')
+                    .attr("x", xScale(70))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1)
+                      .transition()
+                      .duration(1500)
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1)
+};
+
+var gitOthersPushAnimation = function(){
+    pushedFile = d3.select('#file4')
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(0))
+                    .attr("opacity",1)
+                      .transition()
+                      .duration(2000)
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1);
+}
+
+var gitFetchAnimation = function(){
+    // newFile = d3.select('#file1')
+    //             .attr("x", xScale(25))
+    //             .attr("y", yScale(50))
+    //             .attr("opacity",1);
+
+    // addedFile = d3.select('#file2')
+    //               .attr("x", xScale(45))
+    //               .attr("y", yScale(50))
+    //               .attr("opacity",0);
+
+    pushedFile = d3.select('#file4')
+                    .attr("x", xScale(85))
+                    .attr("y", yScale(50))
+                    .attr("opacity",1);
+
+    fetchedFile = d3.select('#file3')
+                      .attr("x", xScale(80))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1)
+                        .transition()
+                        .duration(1500)
+                      .attr("x", xScale(65))
+                      .attr("y", yScale(50))
+                      .attr("opacity",1)
+};
+
+var resetAnimation = function(){
+  d3.selectAll('.file-icon')
+      .transition()
+      .duration(300)
+    .attr("opacity", 0);
+}
 
 /*  UI Event Handlers
     Attaching Event Handlers and Listeners to user-driven elements in the story
 */
 
 $('#loc-model-rect-link').click(function(){ showAllRects(); return false; });
-$('#upstream-create-link').click(function(){ createNewFileAnimation(); return false; });
-$('#upstream-add-link').click(function(){ gitAdd(); return false; });
-$('#upstream-commit-link').click(function(){ gitCommit(); return false; });
-$('#upstream-push-link').click(function(){ gitPush(); return false; });
 
+//File commands
+$('.reset-link').click(function(){ resetAnimation(); return false; });
+
+//Upstream Commands - create, add, commit, push
+$('#upstream-create-link').click(function(){ createNewFileAnimation(); return false; });
+$('#upstream-add-link').click(function(){ gitAddAnimation(); return false; });
+$('#upstream-commit-link').click(function(){ gitCommitAnimation(); return false; });
+$('#upstream-push-link').click(function(){ gitPushAnimation(); return false; });
+
+//Downstream Commands - create, add, commit, push
+$('#downstream-others-push-link').click(function(){ gitOthersPushAnimation(); return false; });
+$('#downstream-fetch-link').click(function(){ gitFetchAnimation(); return false; });
+$('#downstream-merge-link').click(function(){ gitMergeAnimation(); return false; });
+$('#downstream-pull-link').click(function(){ gitPullAnimation(); return false; });
+
+//Up + Down  Commands - New File, Stash, Apply, Pull, Pop
+$('#updown-stash-link').click(function(){ createNewFileAnimation(); return false; });
+$('#updown-create-link').click(function(){ gitAddAnimation(); return false; });
+$('#updown-apply-link').click(function(){ gitCommitAnimation(); return false; });
+$('#updown-pull-link').click(function(){ gitPushAnimation(); return false; });
+$('#updown-pop-link').click(function(){ gitPushAnimation(); return false; });
 
 
 // set up scroll and display

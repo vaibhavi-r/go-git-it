@@ -71,13 +71,20 @@ rect:hover {
   font-size:80px;
   text-anchor: middle;
   cursor: default;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 #vis .sub-title {
   font-size:50px;
   text-anchor: middle;
   cursor: default;
-
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 .axis path,
@@ -89,14 +96,13 @@ rect:hover {
 
 .highlight {
 /*  fill: #008080; */
-  fill: #B266B2;
+  fill: #6e9cd0;
   font-weight: bold;
 }
 
 .arrow {
   stroke: #000;
   stroke-width: 4px;
-
 }
 
 .space-text{
