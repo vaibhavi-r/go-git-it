@@ -543,7 +543,7 @@ var scrollVis = function(){
       showAllTitles();
       resetAnimation();
       //showElement('#space-text');
-      showElement('#place-icon');
+      showElement('.place-icon');
 
 
     }
