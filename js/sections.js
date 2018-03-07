@@ -183,7 +183,7 @@ var scrollVis = function(){
 
         //Create Images for each picture that might be on the screen              
         createImage("/src/images/git_icon.svg",    "icon picture", "git-icon", "git icon", 30, 100, 400, 400, 0);
-        createImage("/src/images/places_model.svg", "places", "places-model", "places model", 0, 100, 850, 340, 0);
+        createImage("src/images/places_model.svg", "places", "places-model", "places model", 0, 100, 850, 340, 0);
 
 
         //@global
