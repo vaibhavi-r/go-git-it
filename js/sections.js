@@ -187,7 +187,7 @@ var scrollVis = function(){
         //@global
         w_file = width/10;
         h_file = w_file;   
-        createImage("/src/images/file-green.svg",  "icon file-icon", "file1", "git icon", 0, 0, w_file, h_file, 0);
+        createImage("/src/images/file.png",  "icon file-icon", "file1", "git icon", 0, 0, w_file, h_file, 0);
         createImage("/src/images/file-black.svg",  "icon file-icon", "file2", "git icon", 0, 50, w_file, h_file, 0);
         createImage("/src/images/file-red.svg",    "icon file-icon", "file3", "git icon", 0, 50, w_file, h_file, 0);
         createImage("/src/images/file-yellow.svg", "icon file-icon", "file4", "git icon", 0, 50, w_file, h_file, 0);
