@@ -49,31 +49,38 @@
                         <li>a local repository</li>
                         <li>A remote repository</li>
                     </ul>
-                    <a nohref id="loc-model-rect-link" class="dotty"> Click to see the locations</a>
+                   <!--  <a nohref id="loc-model-rect-link" class="dotty"> Click to see the locations</a> -->
                 </section>
                 <section class="step workspace-sec">
                     <div class="title">Workspace</div>
-                    Lorem Ipsum Shistum
+                    This is the local working directory for your local repository whose contents are checked out in the branch you are working in.
                 </section>
                 <section class="step index-sec">
                     <div class="title">Index</div>
-                    Files you want to commit. Before you “commit” (checkin) files, you need to first add them to the index. Also called "current directory cache", "staging area", "cache" or "staged files".
+                    These include the files you want to commit. This is considered the staging area where the files you 
+                    Before you “commit” (checkin) files, you need to first add them to the index. Also called "current directory cache", "staging area", "cache" or "staged files".
                 </section>
                 <section class="step local-rep-sec">
                     <div class="title">Local Repository</div>
                     Git local repository is the one on which we will make local changes, typically this local repository is on our computer.
+                    It contains a subdirectory named `.git` that contains all of your necessary repository files — a Git repository skeleton. 
+                    The default name for a local branch is <strong>"master"</strong>.
                 </section>
                 <section class="step remote-rep-sec">
                     <div class="title">Remote Repository</div>
-                    Git remote repository is the one of the server.
+                    Git remote repository is a remotely hosted service which stores a version(s) of your code, ensuring all your changes are available for other developers. The default name for a remote is <strong>"origin"</strong>.
                 </section>
                 <section class="step stash-sec">
                     <div class="title">Stash</div>
-                    Lorem Ipsum Shistum
+                    This is a place where you can store your code changes while you are trying to pull in the latest version from the remote repository.
                 </section>
                 <section class="step git-commands-sec">
-                    <div class="title">Let's add some GIT Commands</div>
-                    Lorem Ipsum Shistum
+                    <div class="title">Learn about some Git Commands</div>
+                     As we have seen above our source code are usually physically hosted on two machines: a local and a remote repo. 
+                     While collaborating with people on the same repository, we regularly encounter situations when we need to either update our local repository
+                     to take up changes that someone else has made. Similarly, we also push our code to the remote repository when we want to update the codebase so others can access the new version. It is therefore, critical to understand the idea of code flowing upstream and downstream.
+                     Scroll down to understand these flows.
+
                 </section>
                 <section class="step upstream-sec">
                     <div class="title">Create New File</div>
@@ -149,8 +156,8 @@
                 </section>
                 <section class="step explore-sec">
                     <div class="title">Time to Explore !</div>
-                    Hopefully you've gained an intuition for Git commands! Let's explore them in an interactive manner!
-                    <a nohref id="start-quiz" class="dotty"> Start quiz </a>
+                    Hopefully you've gained an intuition for Git commands! Let's explore them in an interactive manner with a quiz!
+                    <a nohref id="start-quiz" class="dotty"> </a>
                 </section>
             </div>
             <div id='vis'>
