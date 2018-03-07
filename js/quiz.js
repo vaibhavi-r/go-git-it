@@ -85,7 +85,7 @@
         b: "both 'git fetch' and 'git pull' retrieve all new commits from a remotee",
         c: " 'git pull' merges content for all branches, 'git fetch' does not"
       },
-      correctAnswer: "c"
+      correctAnswer: "b"
     },
     {
       question: "How does `git merge` handle whitespace differences between versions?",
