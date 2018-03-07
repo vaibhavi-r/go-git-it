@@ -192,7 +192,7 @@ var scrollVis = function(){
         createImage("src/images/file-black.png",  "icon file-icon", "file1", "file", 0, 0, w_file, h_file, 0);
         createImage("src/images/file-black.png",  "icon file-icon", "file2", "file", 0, 50, w_file, h_file, 0);
         createImage("src/images/file-black.png",    "icon file-icon", "file3", "file", 0, 50, w_file, h_file, 0);
-        createImage("/src/images/file-black.png", "icon file-icon", "file4", "file", 0, 50, w_file, h_file, 0);
+        createImage("src/images/file-black.png", "icon file-icon", "file4", "file", 0, 50, w_file, h_file, 0);
 
 
         createImage("src/images/cloud.png",    "icon place-icon", "remote-icon", "git icon", 85, 80, w_file, h_file, 0);
