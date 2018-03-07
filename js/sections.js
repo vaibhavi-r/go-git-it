@@ -973,7 +973,7 @@ var gitPullAnimation = function(){
     pushedFile = d3.select('#file3')
                     .attr("x", xScale(85))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenPurpleFile)
+                    .attr("xlink:href", writtenRedFile)
                     .attr("opacity",1); //color 3
 
     incomingFetchFile = d3.select('#file4') 
@@ -990,11 +990,12 @@ var gitPullAnimation = function(){
     incomingMergeFile = d3.select('#file2')
                     .attr("x", xScale(65))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenPurpleFile)                    
-                    .attr("opacity",1) //color 3
+                    .attr("xlink:href", writtenRedFile)                    
+                    .attr("opacity",1) //color 1
                       .transition()
                       .delay(1500)
                       .duration(1500)
+                    .attr("xlink:href", writtenPurpleFile)                    
                     .attr("x", xScale(25))
                     .attr("y", yScale(50))
                     .attr("opacity",1); //color 3

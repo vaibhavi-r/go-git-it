@@ -13,15 +13,14 @@
         <div id='graphic'>
             <div id='sections'>
                 <section class="step landing-sec">
-                    <div class="title">An Introduction to Git</div>
-                    Why?.
+                    <div class="title">Hi There!</div>
                     <br/>
                     <br> Chances are you have heard or worked with Git. It is one of the most popular code management systems in the world. But it can be quite daunting to comprehend the inner workings of this system, especially if you are collaborating with others and working on multiple branches.
                     <p>
                     </p>
                     This project's goal is to essentially demystify the Git version control system. If you are new to Git and if you ever wondered about the underlying process, you're at the right place.
                     </p>
-                    <p>Scroll down to learn about the Git Content Model, an intuitive way to understand basic Git commands and play with the interactive visualization.
+                    <p>Scroll down to learn about the Git Places Model, an intuitive way to understand basic Git commands and play with the interactive visualization.
                     </p>
                 </section>
                 <section class="step git-intro-sec">
@@ -38,10 +37,8 @@
                     </ul>
                 </section>
                 <section class="step location-model-sec">
-                    <div class="title">Git Location Model</div>
-                    Git Structure
-                    <br/>
-                    <br/> Where does git store your code. Contrary to what you'd think, it's not just your computer and the cloud. In Git, there are five places your source can exist:
+                    <div class="title">The Git Places Model</div>
+                    <br/> Where does git store your files? Contrary to what you'd think, it's not just your computer and the cloud. In Git, there are five places your source can exist:
                     <ul>
                         <li>A Stash</li>
                         <li>A Local working directory.</li>
@@ -49,7 +46,8 @@
                         <li>a local repository</li>
                         <li>A remote repository</li>
                     </ul>
-                   <!--  <a nohref id="loc-model-rect-link" class="dotty"> Click to see the locations</a> -->
+                        The first four are located in each user's personal computer, whereas the remote repository is shared by all users. Scroll down to learn more about them!
+
                 </section>
                 <section class="step workspace-sec">
                     <div class="title">Workspace</div>
@@ -57,7 +55,7 @@
                 </section>
                 <section class="step index-sec">
                     <div class="title">Index</div>
-                    These include the files you want to commit. This is considered the staging area where the files you 
+                    These include the files you want to commit. This is considered the staging area where the files you intend to commit are temporarily tracked.
                     Before you “commit” (checkin) files, you need to first add them to the index. Also called "current directory cache", "staging area", "cache" or "staged files".
                 </section>
                 <section class="step local-rep-sec">
@@ -75,89 +73,77 @@
                     This is a place where you can store your code changes while you are trying to pull in the latest version from the remote repository.
                 </section>
                 <section class="step git-commands-sec">
-                    <div class="title">Learn about some Git Commands</div>
-                     As we have seen above our source code are usually physically hosted on two machines: a local and a remote repo. 
-                     While collaborating with people on the same repository, we regularly encounter situations when we need to either update our local repository
-                     to take up changes that someone else has made. Similarly, we also push our code to the remote repository when we want to update the codebase so others can access the new version. It is therefore, critical to understand the idea of code flowing upstream and downstream.
-                     Scroll down to understand these flows.
-
+                    <div class="title">Commands Move Files</div>
+                     While collaborating with people on the same repository, we regularly encounter situations when we need to either update our local folders
+                     to take up changes that someone else has made. Similarly, we push our code to the remote repository when we want to update the codebase so others can access the new version. It is therefore, critical to understand the idea of code flowing upstream (from your computer to the cloud repository) and downstream (from the cloud repository to your computer). Scroll down to understand how Git commands move your files.
                 </section>
                 <section class="step upstream-sec">
-                    <div class="title">Create New File</div>
-                    <a nohref id="upstream-create-link" class="dotty"> create new file </a>
-                    <div class="title">Git Add</div>
-                    <a nohref id="upstream-add-link" class="dotty"> git add </a> ACTION LINK: Create a new file ACTION LINK: git add
-                    <!-- <div class="title">Git Commit</div>
-                    ACTION LINK: Add to git ACTION LINK: git commit file
-                    <a nohref id="upstream-commit-link" class="dotty"> git commit </a>
-                    <div class="title">Git Push</div>
-                    ACTION LINK: Push a committed file to repo ACTION LINK: See entire workflow at at once (create, add, commit, push)
-                    <a nohref id="upstream-push-link" class="dotty"> git push </a>
-                    <div class="title">Reset Canvas</div>
-                    <a nohref class="reset-link dotty"> Play Again</a> Lorem Ipsum Shistum
-                </section>
-                <section class="step downstream-sec">
-                    <div class="title">Git Push From Someone else</div>
-                    <a nohref id="downstream-others-push-link" class="dotty"> someone else's push </a>
-                    <div class="title">Git Fetch</div>
-                    <a nohref id="downstream-fetch-link" class="dotty"> git fetch </a>
-                    <div class="title">Git Merge</div>
-                    <a nohref id="downstream-merge-link" class="dotty"> git merge </a>
-                    <div class="title">Git Pull</div>
-                    <a nohref id="downstream-pull-link" class="dotty"> git pull </a>
-                </section>
-                <section class="step stash-commands-sec">
-                    <div class="title">Using the Stash</div>
-                    Lorem Ipsum Shistum
-                    <div class="title"> Git Stash</div>
-                    Lorem Ipsum Shistum
-                    <div class="title">Stash Apply</div>
-                    Lorem Ipsum Shistum
-                    <div class="title"> Git Stash</div>
-                    Lorem Ipsum Shistum
-                    <div class="title">Stash Drop</div>
-                    Lorem Ipsum Shistum
-                </section> -->
-                    <div class="title">Git Commit</div>
-                    ACTION LINK: Add to git ACTION LINK: git commit file
-                    <a nohref id="upstream-commit-link" class="dotty"> git commit </a>
-                    <div class="title">Git Push</div>
-                    ACTION LINK: Push a committed file to repo ACTION LINK: See entire workflow at at once (create, add, commit, push)
-                    <a nohref id="upstream-push-link" class="dotty"> git push </a>
-                    <div class="title">Reset Canvas</div>
-                    <a nohref class="reset-link dotty"> Play Again</a> Lorem Ipsum Shistum
-                </section>
-                <section class="step downstream-sec">
-                    <div class="title">Git Push From Someone else</div>
-                    <a nohref id="downstream-others-push-link" class="dotty"> someone else's push </a>
-                    <div class="title">Git Fetch</div>
-                    <a nohref id="downstream-fetch-link" class="dotty"> git fetch </a>
-                    <div class="title">Git Merge</div>
-                    <a nohref id="downstream-merge-link" class="dotty"> git merge </a>
-                    <div class="title">Git Pull</div>
-                    <a nohref id="downstream-pull-link" class="dotty"> git pull </a>
+                    <div class="title">Scenario 1: Share with the world!</div>
+                    <p>
+                    Let's say you are working on a blog post. You <a nohref id="upstream-create-link" class="dotty"> create, edit and save a new file </a>. How do you let the world know about it?
+                    </p>
+
+                    <p>
+                    Try <a nohref id="upstream-add-link" class="dotty"> git add </a> to start tracking files, which you intend to commit and share. Make as many changes, as you wish and keep adding it to the staging area. </p>
+
+                    <p>Once you are ready, use <a nohref id="upstream-commit-link" class="dotty"> git commit </a> to move these changes out of the temporary index to your local repository. Each commit creates a new commit node in a commit tree structure stored in the .git subdirectory. If you wish to "undo" a commit, Git can track these changes in the tree.</p>
+
+                    <p> After committing multiple versions of the file, use <a nohref id="upstream-push-link" class="dotty"> git push </a> to send the file over to the cloud repository. Your blog post is now available to all your collaborators!
+                    </p>
+
                     <a nohref class="reset-link dotty"> Play Again</a>
                 </section>
+
+
+
+                <section class="step downstream-sec">
+                    <div class="title">Scenario 2: Bringing New Opinions</div>
+                   <p>
+                        Let's say that you finalized your version of the blog post and pushed it to the cloud. Your team can now makes changes, and your <a nohref id="downstream-others-push-link" class="dotty"> co-author pushes a new version </a> to the cloud. How do you see the combined file? With downstream commands!
+                   </p>
+
+                    <p>
+                        First, you can carefully bring the changes to your local repository using <a nohref id="downstream-fetch-link" class="dotty"> git fetch </a>. This doesn't change your workspace, so you can potentially still see and/or change your old blog post.
+                        Then, with <a nohref id="downstream-merge-link" class="dotty"> git merge </a> the combined file is now reflected in your directory and a node is automatically added in the commit tree.
+                    </p>
+
+                    <p> 
+                        Alternatively, if you feel lazy, you can use <a nohref id="downstream-pull-link" class="dotty"> git pull </a> that does a fetch and merge combined.The caveat: Merge and pull work on a clean working directory, i.e. without any uncommitted/ untracked changes.
+                    </p>
+                    <a nohref class="reset-link dotty"> Play Again</a>
+                </section>
+
+
+
                 <section class="step stash-commands-sec">
-                    <div class="title">Using the Stash</div>
-                    Lorem Ipsum Shistum
-                    <a nohref id="updown-edit-link" class="dotty"> create and edit an untracked file </a>
-                    <div class="title"> Git Stash</div>
-                    Lorem Ipsum Shistum
-                    <a nohref id="updown-stash-link" class="dotty"> git stash </a>
-                    <div class="title">Stash Pop</div>
-                    <a nohref id="updown-pop-link" class="dotty"> git pop </a> Lorem Ipsum Shistum
-                    <div class="title"> Git Pull</div>
-                    Lorem Ipsum Shistum
-                    <a nohref id="updown-pull-link" class="dotty"> git pull </a>
-                    <div class="title">Stash Drop</div>
-                    Lorem Ipsum Shistum
+                    <div class="title">Scenario 3: Edit, Interrupted</div>
+                    <p>
+                        Often, the cloud repository changes while you are working on files as well.
+                        Let's create a simple website for a team project. You <a nohref id="updown-edit-link" class="dotty"> create and start editing an HTML file</a>, as your co-author pushes an image to the repository. How do you bring this image file into your current directory? 
+                    </p>
+
+                    <p> If you try to <a nohref id="updown-pull-link" class="dotty"> git pull </a>
+                        like earlier, it won't work! That's because your working directory has untracked changes!
+                    </p>
+
+                    <p> You don't want to delete this HTML file, or commit/push it yet. With <a nohref id="updown-stash-link" class="dotty"> git stash </a>, you can store away all these uncommitted and untracked changes temporarily. Try the pull command again to see the difference.
+                    </p>
+
+                    <p> Restoring your work in progress, is now easy. Use <a nohref id="updown-pop-link" class="dotty"> git pop </a> to clear out the stash, and bring back your changes to the working directory.
+                    </p>
                     <a nohref class="reset-link dotty"> Play Again</a>
                 </section>
                 <section class="step explore-sec">
-                    <div class="title">Time to Explore !</div>
+                    <div class="title">Quiz!</div>
                     Hopefully you've gained an intuition for Git commands! Let's explore them in an interactive manner with a quiz!
-                    <a nohref id="start-quiz" class="dotty"> </a>
+                    If you liked this project, consider checking out these resources that inspired us.
+                    <ul>
+                        <li><a href="https://www.git-tower.com/blog/git-cheat-sheet/">Git CheatSheet</a></li>
+                        <li><a href="https://try.github.io/levels/1/challenges/1">Git Tutorial</a></li>
+                    </ul>
+                    
+
+<!--                     <a nohref id="start-quiz" class="dotty"> </a>-->
                 </section>
             </div>
             <div id='vis'>
