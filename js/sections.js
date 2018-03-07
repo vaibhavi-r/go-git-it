@@ -96,14 +96,14 @@ var scrollVis = function(){
           .attr('class', 'x axis')
           .attr('transform', 'translate(0,' + height + ')')
           .call(xAxis);
-        g.select('.x.axis').style('opacity', 1);
+        g.select('.x.axis').style('opacity', 0);
 
         // y-axis
         g.append('g')
           .attr('class', 'y axis')
           .attr('transform', 'translate(0,0)')
           .call(yAxis);
-        g.select('.y.axis').style('opacity', 1);
+        g.select('.y.axis').style('opacity', 0);
 
 
         // vis title
@@ -122,6 +122,8 @@ var scrollVis = function(){
         g.selectAll('.vis-title')
           .attr('opacity', 0);
 
+
+
         //Function to create rectangle with given dimensions, fill and opacity
         var createText = function(className,id, txt, x, y, op)
         {
@@ -133,6 +135,7 @@ var scrollVis = function(){
               .attr('opacity',op)
               .text(txt);
         }
+        
 
         createText("space-text","workspace-text","Workspace",25,75,0);
         createText("space-text","index-text","Index",45,75,0);
@@ -529,6 +532,10 @@ var scrollVis = function(){
      * hides:
      */
     var showStashCommands = function(){
+      $('#quiz').addClass("showquiz");
+      $('#qresults').addClass("showquiz");
+      showAllRects();
+      showAllTitles();
 
     }
 
@@ -540,6 +547,12 @@ var scrollVis = function(){
      * hides:
      */
     function showExplore(){
+      $('#quiz').toggleClass("showquiz");
+      $('#qresults').toggleClass("showquiz");
+      hideElement('.rectangle');
+      hideElement('.space-text');
+      hideElement('.file-icon');
+
 
     }
 
@@ -670,7 +683,7 @@ var addedFile;
 var committedFile;
 var pushedFile;
 
-
+var quiz;
 
 /*  UI Event Logic Implementation
     Functions to execute event logic when fired by event handler
@@ -682,6 +695,15 @@ var showAllRects = function (){
     showRectangle('.remote-rep',85,65);
     showRectangle('.local-rep',65,65);
     showRectangle('.stash',5,65);
+}
+
+var showAllTitles = function (){
+    showText('#workspace-text');
+    showText('#index-text');
+    showText('#localrep-text');
+    showText('#remoterep-text');
+    showText('#stash-text');
+
 }
 
 var createNewFileAnimation = function()
@@ -813,7 +835,8 @@ var resetAnimation = function(){
       .transition()
       .duration(300)
     .attr("opacity", 0);
-}
+};
+
 
 /*  UI Event Handlers
     Attaching Event Handlers and Listeners to user-driven elements in the story
@@ -842,6 +865,7 @@ $('#updown-create-link').click(function(){ gitAddAnimation(); return false; });
 $('#updown-apply-link').click(function(){ gitCommitAnimation(); return false; });
 $('#updown-pull-link').click(function(){ gitPushAnimation(); return false; });
 $('#updown-pop-link').click(function(){ gitPushAnimation(); return false; });
+
 
 
 // set up scroll and display

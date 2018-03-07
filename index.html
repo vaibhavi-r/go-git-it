@@ -1,168 +1,137 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Git Yourself Out of Trouble</title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-  <link rel="stylesheet" type="text/css" href="css/style.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+    <title>Git Yourself Out of Trouble</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+
 <body>
-<div class="container">
-  <div id='graphic'>
-    <div id='sections'>
-
-      <section class="step landing-sec">
-        <div class="title">An Introduction to Git</div>
-        Why?.<br/><br>
-          Chances are you have heard or worked with Git. It is one of the most popular code management systems in the world.
-          But it can be quite daunting to comprehend the inner workings of this system, especially if you are collaborating with others 
-          and working on multiple branches.
-          <p>
-          </p>
-          This project's goal is to essentially demystify the Git version control system. 
-          If you are new to Git and if you ever wondered about the underlying process, you're at the right place. 
-  
-          </p>  
-<!--           <h4>The Aim</h4> -->
-          <p>Scroll down to learn about the Git Content Model, an intuitive way to understand basic Git commands and play with the interactive visualization.
-          </p>
-      </section>
-
-      <section class="step git-intro-sec">
-        <div class="title">So, what is Git?</div>
-          Git is a type of version control system (VCS) that makes it easier to track changes to files. For example, when you edit a file, git can help you determine exactly what changed, who changed it, and why. 
-          <br><br>
-          <strong>What makes git unique?</strong><br>
-          <ul>
-            <li>Git branches are cheap and easy to merge. This facilitates the feature branch workflow popular with many Git users.</li>
-            <li>Git is a distributed version control system. Every user gets their own local repository, complete with a full history of commits.</li>
-            <li>Having a full local history makes Git fast, since it means you don’t need a network connection to create commits, inspect previous versions of a file, or perform diffs between commits.</li>
-          </ul>
-  
-
-
-      </section>
-
-      <section class="step location-model-sec">
-        <div class="title">Git Location Model</div>
-          Git Structure<br/><br/>
-          Where does git store your code. Contrary to what you'd think, it's not just your computer and the cloud. 
-          In Git, there are five places your source can exist: 
-          <ul>
-            <li>A Stash</li>
-            <li>A Local working directory.</li>
-            <li>An Index (or staging area)</li>
-            <li>a local repository</li>
-            <li>A remote repository</li>
-          </ul>
-
-           <a nohref id="loc-model-rect-link" class="dotty"> Click to see the locations</a>
-
-      </section>
-
-      <section class="step workspace-sec">
-        <div class="title">Workspace</div>
-        Lorem Ipsum Shistum
-      </section>
-
-      <section class="step index-sec">
-        <div class="title">Index</div>
-        Files you want to commit. Before you “commit” (checkin) files, you need to first add them to the index. Also called "current directory cache", "staging area", "cache" or "staged files".
-      </section>
-
-      <section class="step local-rep-sec">
-        <div class="title">Local Repository</div>
-        Git local repository is the one on which we will make local changes, typically this local repository is on our computer.
-      </section>
-
-      <section class="step remote-rep-sec">
-        <div class="title">Remote Repository</div>
-        Git remote repository is the one of the server.
-      </section>
-
-      <section class="step stash-sec">
-        <div class="title">Stash</div>
-        Lorem Ipsum Shistum
-      </section>
-
-      <section class="step git-commands-sec">
-        <div class="title">Let's add some GIT Commands</div>
-        Lorem Ipsum Shistum
-      </section>
-
-      <section class="step upstream-sec">
-
-        <div class="title">Create New File</div>
-          <a nohref id="upstream-create-link" class="dotty"> create new file </a>
-
-        <div class="title">Git Add</div>
-          <a nohref id="upstream-add-link" class="dotty"> git add </a>
-
-          ACTION LINK: Create a new file
-          ACTION LINK: git add
-
-        <div class="title">Git Commit</div>
-         ACTION LINK: Add to git 
-         ACTION LINK: git commit file
-          <a nohref id="upstream-commit-link" class="dotty"> git commit </a>
-
-        <div class="title">Git Push</div>
-         ACTION LINK: Push a committed file to repo 
-         ACTION LINK: See entire workflow at at once (create, add, commit, push)
-          <a nohref id="upstream-push-link" class="dotty"> git push </a>
-
-        <div class="title">Reset Canvas</div>
-          <a nohref class="reset-link dotty"> Play Again</a>
-        Lorem Ipsum Shistum
-      </section>
-
-
-      <section class="step downstream-sec">
-        <div class="title">Git Push From Someone else</div>
-          <a nohref id="downstream-others-push-link" class="dotty"> someone else's push </a>
-
-        <div class="title">Git Fetch</div>
-          <a nohref id="downstream-fetch-link" class="dotty"> git fetch </a>
-
-        <div class="title">Git Merge</div>
-          <a nohref id="downstream-merge-link" class="dotty"> git merge </a>
-
-        <div class="title">Git Pull</div>
-          <a nohref id="downstream-pull-link" class="dotty"> git pull </a>
-      </section>
-
-      
-      <section class="step stash-commands-sec">
-        <div class="title">Using the Stash</div>
-        Lorem Ipsum Shistum
-        <div class="title"> Git Stash</div>
-        Lorem Ipsum Shistum
-
-        <div class="title">Stash Apply</div>
-        Lorem Ipsum Shistum
-
-        <div class="title"> Git Stash</div>
-        Lorem Ipsum Shistum
-
-        <div class="title">Stash Drop</div>
-        Lorem Ipsum Shistum
-      </section>
-
-      <section class="step explore-sec">
-        <div class="title">Time to Explore !</div>
-        Hopefully you've gained an intuition for Git commands! Let's explore them in an interactive manner!
-      </section>
+    <div class="container">
+        <div id='graphic'>
+            <div id='sections'>
+                <section class="step landing-sec">
+                    <div class="title">An Introduction to Git</div>
+                    Why?.
+                    <br/>
+                    <br> Chances are you have heard or worked with Git. It is one of the most popular code management systems in the world. But it can be quite daunting to comprehend the inner workings of this system, especially if you are collaborating with others and working on multiple branches.
+                    <p>
+                    </p>
+                    This project's goal is to essentially demystify the Git version control system. If you are new to Git and if you ever wondered about the underlying process, you're at the right place.
+                    </p>
+                    <p>Scroll down to learn about the Git Content Model, an intuitive way to understand basic Git commands and play with the interactive visualization.
+                    </p>
+                </section>
+                <section class="step git-intro-sec">
+                    <div class="title">So, what is Git?</div>
+                    Git is a type of version control system (VCS) that makes it easier to track changes to files. For example, when you edit a file, git can help you determine exactly what changed, who changed it, and why.
+                    <br>
+                    <br>
+                    <strong>What makes git unique?</strong>
+                    <br>
+                    <ul>
+                        <li>Git branches are cheap and easy to merge. This facilitates the feature branch workflow popular with many Git users.</li>
+                        <li>Git is a distributed version control system. Every user gets their own local repository, complete with a full history of commits.</li>
+                        <li>Having a full local history makes Git fast, since it means you don’t need a network connection to create commits, inspect previous versions of a file, or perform diffs between commits.</li>
+                    </ul>
+                </section>
+                <section class="step location-model-sec">
+                    <div class="title">Git Location Model</div>
+                    Git Structure
+                    <br/>
+                    <br/> Where does git store your code. Contrary to what you'd think, it's not just your computer and the cloud. In Git, there are five places your source can exist:
+                    <ul>
+                        <li>A Stash</li>
+                        <li>A Local working directory.</li>
+                        <li>An Index (or staging area)</li>
+                        <li>a local repository</li>
+                        <li>A remote repository</li>
+                    </ul>
+                    <a nohref id="loc-model-rect-link" class="dotty"> Click to see the locations</a>
+                </section>
+                <section class="step workspace-sec">
+                    <div class="title">Workspace</div>
+                    Lorem Ipsum Shistum
+                </section>
+                <section class="step index-sec">
+                    <div class="title">Index</div>
+                    Files you want to commit. Before you “commit” (checkin) files, you need to first add them to the index. Also called "current directory cache", "staging area", "cache" or "staged files".
+                </section>
+                <section class="step local-rep-sec">
+                    <div class="title">Local Repository</div>
+                    Git local repository is the one on which we will make local changes, typically this local repository is on our computer.
+                </section>
+                <section class="step remote-rep-sec">
+                    <div class="title">Remote Repository</div>
+                    Git remote repository is the one of the server.
+                </section>
+                <section class="step stash-sec">
+                    <div class="title">Stash</div>
+                    Lorem Ipsum Shistum
+                </section>
+                <section class="step git-commands-sec">
+                    <div class="title">Let's add some GIT Commands</div>
+                    Lorem Ipsum Shistum
+                </section>
+                <section class="step upstream-sec">
+                    <div class="title">Create New File</div>
+                    <a nohref id="upstream-create-link" class="dotty"> create new file </a>
+                    <div class="title">Git Add</div>
+                    <a nohref id="upstream-add-link" class="dotty"> git add </a> ACTION LINK: Create a new file ACTION LINK: git add
+                    <div class="title">Git Commit</div>
+                    ACTION LINK: Add to git ACTION LINK: git commit file
+                    <a nohref id="upstream-commit-link" class="dotty"> git commit </a>
+                    <div class="title">Git Push</div>
+                    ACTION LINK: Push a committed file to repo ACTION LINK: See entire workflow at at once (create, add, commit, push)
+                    <a nohref id="upstream-push-link" class="dotty"> git push </a>
+                    <div class="title">Reset Canvas</div>
+                    <a nohref class="reset-link dotty"> Play Again</a> Lorem Ipsum Shistum
+                </section>
+                <section class="step downstream-sec">
+                    <div class="title">Git Push From Someone else</div>
+                    <a nohref id="downstream-others-push-link" class="dotty"> someone else's push </a>
+                    <div class="title">Git Fetch</div>
+                    <a nohref id="downstream-fetch-link" class="dotty"> git fetch </a>
+                    <div class="title">Git Merge</div>
+                    <a nohref id="downstream-merge-link" class="dotty"> git merge </a>
+                    <div class="title">Git Pull</div>
+                    <a nohref id="downstream-pull-link" class="dotty"> git pull </a>
+                </section>
+                <section class="step stash-commands-sec">
+                    <div class="title">Using the Stash</div>
+                    Lorem Ipsum Shistum
+                    <div class="title"> Git Stash</div>
+                    Lorem Ipsum Shistum
+                    <div class="title">Stash Apply</div>
+                    Lorem Ipsum Shistum
+                    <div class="title"> Git Stash</div>
+                    Lorem Ipsum Shistum
+                    <div class="title">Stash Drop</div>
+                    Lorem Ipsum Shistum
+                </section>
+                <section class="step explore-sec">
+                    <div class="title">Time to Explore !</div>
+                    Hopefully you've gained an intuition for Git commands! Let's explore them in an interactive manner!
+                    <a nohref id="start-quiz" class="dotty"> Start quiz </a>
+                </section>
+            </div>
+            <div id='vis'>
+              <div id="quiz" class = "showquiz"></div>
+              <div id="qresults" class = "showquiz">
+              <button id="submit">Submit</button>
+              <div id="results"></div>
+              </div>
+            </div>
+            <div id="extra-space">
+            </div>
+        </div>
     </div>
-    <div id='vis'>
-    </div>
-    <div id="extra-space">
-    </div>
-  </div>
-</div>
-
-
-<script src="lib/d3.js"></script>
-<script src="js/scroller.js"></script>
-<script src="js/sections.js"></script>
+    <script src="lib/d3.js"></script>
+    <script src="js/scroller.js"></script>
+    <script src="js/sections.js"></script>
+    <script src="js/quiz.js"></script>
 </body>
+
 </html>
