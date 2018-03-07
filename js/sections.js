@@ -182,24 +182,24 @@ var scrollVis = function(){
         }
 
         //Create Images for each picture that might be on the screen              
-        createImage("/src/images/git_icon.svg",    "icon picture", "git-icon", "git icon", 30, 100, 400, 400, 0);
-        createImage("/src/images/places_model.svg", "places", "places-model", "places model", 0, 100, 850, 340, 0);
+        createImage("src/images/git_icono.svg",    "icon picture", "git-icon", "git icon", 30, 100, 400, 400, 0);
+        createImage("src/images/places_model.svg", "places", "places-model", "places model", 0, 100, 850, 340, 0);
 
 
         //@global
         w_file = width/10;
         h_file = w_file;   
-        createImage("/src/images/file-black.png",  "icon file-icon", "file1", "file", 0, 0, w_file, h_file, 0);
-        createImage("/src/images/file-black.png",  "icon file-icon", "file2", "file", 0, 50, w_file, h_file, 0);
-        createImage("/src/images/file-black.png",    "icon file-icon", "file3", "file", 0, 50, w_file, h_file, 0);
-        createImage("/src/images/file-black.png", "icon file-icon", "file4", "file", 0, 50, w_file, h_file, 0);
+        createImage("src/images/file-black.png",  "icon file-icon", "file1", "file", 0, 0, w_file, h_file, 0);
+        createImage("src/images/file-black.png",  "icon file-icon", "file2", "file", 0, 50, w_file, h_file, 0);
+        createImage("src/images/file-black.png",    "icon file-icon", "file3", "file", 0, 50, w_file, h_file, 0);
+        createImage("src/images/file-black.png", "icon file-icon", "file4", "file", 0, 50, w_file, h_file, 0);
 
 
-        createImage("/src/images/cloud.png",    "icon place-icon", "remote-icon", "git icon", 85, 80, w_file, h_file, 0);
-        createImage("/src/images/local-rep.png", "icon place-icon", "local-icon", "git icon", 65, 80, w_file, h_file, 0);
-        createImage("/src/images/index.png",    "icon place-icon", "index-icon", "git icon", 45, 80, w_file, h_file, 0);
-        createImage("/src/images/directory.png", "icon place-icon", "directory-icon", "git icon", 25, 80, w_file, h_file, 0);
-        createImage("/src/images/stash.png",    "icon place-icon", "stash-icon", "git icon", 5, 80, w_file, h_file, 0);
+        createImage("src/images/cloud.png",    "icon place-icon", "remote-icon", "git icon", 85, 80, w_file, h_file, 0);
+        createImage("src/images/local-rep.png", "icon place-icon", "local-icon", "git icon", 65, 80, w_file, h_file, 0);
+        createImage("src/images/index.png",    "icon place-icon", "index-icon", "git icon", 45, 80, w_file, h_file, 0);
+        createImage("src/images/directory.png", "icon place-icon", "directory-icon", "git icon", 25, 80, w_file, h_file, 0);
+        createImage("src/images/stash.png",    "icon place-icon", "stash-icon", "git icon", 5, 80, w_file, h_file, 0);
 
         /*
           Add dynamic path for tweening image
@@ -687,17 +687,17 @@ var pushedFile;
 
 var quiz;
 
-var writtenRedFile = '/src/images/document-red.png';
-var writtenPurpleFile = '/src/images/document-purple.png';
-var writtenBlueFile = '/src/images/document-blue.png'
+var writtenRedFile = 'src/images/document-red.png';
+var writtenPurpleFile = 'src/images/document-purple.png';
+var writtenBlueFile = 'src/images/document-blue.png'
 
-var orangeCompareFile = '/src/images/compare-orange.png';
-var redCompareFile = '/src/images/compare-red.png';
-var blueCompareFile = '/src/images/compare-blue.png';
-var purpleCompareFile = '/src/images/compare-purple.png';
+var orangeCompareFile = 'src/images/compare-orange.png';
+var redCompareFile = 'src/images/compare-red.png';
+var blueCompareFile = 'src/images/compare-blue.png';
+var purpleCompareFile = 'src/images/compare-purple.png';
 
-var orangeImageFile = '/src/images/image-file-orange.png';
-var editBlackFile = '/src/images/edit-file-black.png';
+var orangeImageFile = 'src/images/image-file-orange.png';
+var editBlackFile = 'src/images/edit-file-black.png';
 
 
 
@@ -725,9 +725,9 @@ var showAllTitles = function (){
 
 
 
-var newGreenFile = '/src/images/add-file-green.png';
-var emptyBlackFile = '/src/images/file-black.png';
-var writtenBlackFile = '/src/images/document-black.png'
+var newGreenFile = 'src/images/add-file-green.png';
+var emptyBlackFile = 'src/images/file-black.png';
+var writtenBlackFile = 'src/images/document-black.png'
 
 
 /* UPSTREAM COMMANDS*/
