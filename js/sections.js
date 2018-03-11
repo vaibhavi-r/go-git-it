@@ -848,19 +848,19 @@ var gitOthersPushAnimation = function(){
     file = d3.select('#file1')
                     .attr("x", xScale(25))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)
+                    .attr("xlink:href", writtenBlackFile)
                     .attr("opacity",1);  //color 1
 
     committedFile = d3.select('#file2')
                     .attr("x", xScale(65))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)
+                    .attr("xlink:href", writtenBlackFile)
                     .attr("opacity",1); //color 1
 
     pushedFile = d3.select('#file3')
                     .attr("x", xScale(85))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)
+                    .attr("xlink:href", writtenBlackFile)
                     .attr("opacity",1)
                     .transition()
                     .duration(1950)
@@ -870,22 +870,16 @@ var gitOthersPushAnimation = function(){
                     .attr("x", xScale(85))
                     .attr("y", yScale(0))
                     .attr("opacity",1)  //color 2
-                    .attr("xlink:href", writtenBlueFile)
+                    .attr("xlink:href", writtenPurpleFile)
                       .transition()
                       .ease(d3.easeCubic)
                       .duration(2000)
                     .attr("x", xScale(85))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenBlueFile)
+                    .attr("xlink:href", writtenPurpleFile)
                     .attr("opacity",1)
                       .transition()
-                      .duration(300)
-                    .attr("xlink:href", blueCompareFile)
-                      .transition()
-                      .duration(300)
-                    .attr("xlink:href", redCompareFile)
-                      .transition()
-                      .duration(300)
+                      .duration(500)
                     .attr("xlink:href", purpleCompareFile)
                       .transition()
                       .duration(500)
@@ -896,13 +890,13 @@ var gitFetchAnimation = function(){
     file = d3.select('#file1')
                     .attr("x", xScale(25))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)
+                    .attr("xlink:href", writtenBlackFile)
                     .attr("opacity",1); //color 1
 
     committedFile = d3.select('#file2')
                     .attr("x", xScale(65))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)
+                    .attr("xlink:href", writtenBlackFile)
                     .attr("opacity",1); //color 1
 
     pushedFile = d3.select('#file3')
@@ -928,7 +922,7 @@ var gitMergeAnimation = function(){
     file = d3.select('#file1')
                     .attr("x", xScale(25))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)
+                    .attr("xlink:href", writtenBlackFile)
                     .attr("opacity",1); //color 1
 
     committedFile = d3.select('#file2')
@@ -961,19 +955,19 @@ var gitPullAnimation = function(){
     file = d3.select('#file1')
                     .attr("x", xScale(25))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)
+                    .attr("xlink:href", writtenBlackFile)
                     .attr("opacity",1); //color 1
 
     committedFile = d3.select('#file2')
                     .attr("x", xScale(65))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)                    
+                    .attr("xlink:href", writtenBlackFile)                    
                     .attr("opacity",1); //color 1
 
     pushedFile = d3.select('#file3')
                     .attr("x", xScale(85))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)
+                    .attr("xlink:href", writtenPurpleFile)
                     .attr("opacity",1); //color 3
 
     incomingFetchFile = d3.select('#file4') 
@@ -990,7 +984,7 @@ var gitPullAnimation = function(){
     incomingMergeFile = d3.select('#file2')
                     .attr("x", xScale(65))
                     .attr("y", yScale(50))
-                    .attr("xlink:href", writtenRedFile)                    
+                    .attr("xlink:href", writtenBlackFile)                    
                     .attr("opacity",1) //color 1
                       .transition()
                       .delay(1500)
